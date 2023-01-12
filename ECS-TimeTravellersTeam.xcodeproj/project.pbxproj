@@ -13,6 +13,13 @@
 		524E92572970121A001BCBD3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 524E92562970121A001BCBD3 /* Preview Assets.xcassets */; };
 		524E92592970121A001BCBD3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E92582970121A001BCBD3 /* Persistence.swift */; };
 		524E925C2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 524E925A2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld */; };
+		524E926429701265001BCBD3 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926329701265001BCBD3 /* PhotosViewModel.swift */; };
+		524E92672970126E001BCBD3 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E92662970126E001BCBD3 /* Picker.swift */; };
+		524E926B29701279001BCBD3 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926929701279001BCBD3 /* CameraView.swift */; };
+		524E926C29701279001BCBD3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926A29701279001BCBD3 /* MainView.swift */; };
+		524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926E297012C0001BCBD3 /* ImagePicker.swift */; };
+		524E9271297012C0001BCBD3 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */; };
+		524E9274297012C9001BCBD3 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E9273297012C9001BCBD3 /* FileManager+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +30,13 @@
 		524E92562970121A001BCBD3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		524E92582970121A001BCBD3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		524E925B2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ECS_TimeTravellersTeam.xcdatamodel; sourceTree = "<group>"; };
+		524E926329701265001BCBD3 /* PhotosViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
+		524E92662970126E001BCBD3 /* Picker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
+		524E926929701279001BCBD3 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		524E926A29701279001BCBD3 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		524E926E297012C0001BCBD3 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
+		524E9273297012C9001BCBD3 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +70,15 @@
 			isa = PBXGroup;
 			children = (
 				524E924F29701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift */,
+				524E926229701265001BCBD3 /* ViewModel */,
+				524E92652970126E001BCBD3 /* Model */,
+				524E926829701279001BCBD3 /* View */,
 				524E925129701219001BCBD3 /* ContentView.swift */,
 				524E92532970121A001BCBD3 /* Assets.xcassets */,
 				524E92582970121A001BCBD3 /* Persistence.swift */,
 				524E925A2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld */,
+				524E926D297012C0001BCBD3 /* UIViewRepresentables */,
+				524E9272297012C9001BCBD3 /* Extensions */,
 				524E92552970121A001BCBD3 /* Preview Content */,
 			);
 			path = "ECS-TimeTravellersTeam";
@@ -71,6 +90,48 @@
 				524E92562970121A001BCBD3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		524E926229701265001BCBD3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				524E926329701265001BCBD3 /* PhotosViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		524E92652970126E001BCBD3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				524E92662970126E001BCBD3 /* Picker.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		524E926829701279001BCBD3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				524E926929701279001BCBD3 /* CameraView.swift */,
+				524E926A29701279001BCBD3 /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		524E926D297012C0001BCBD3 /* UIViewRepresentables */ = {
+			isa = PBXGroup;
+			children = (
+				524E926E297012C0001BCBD3 /* ImagePicker.swift */,
+				524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */,
+			);
+			path = UIViewRepresentables;
+			sourceTree = "<group>";
+		};
+		524E9272297012C9001BCBD3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				524E9273297012C9001BCBD3 /* FileManager+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,8 +204,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				524E9274297012C9001BCBD3 /* FileManager+Extension.swift in Sources */,
+				524E9271297012C0001BCBD3 /* ZoomableScrollView.swift in Sources */,
 				524E92592970121A001BCBD3 /* Persistence.swift in Sources */,
+				524E926C29701279001BCBD3 /* MainView.swift in Sources */,
+				524E926B29701279001BCBD3 /* CameraView.swift in Sources */,
+				524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */,
+				524E92672970126E001BCBD3 /* Picker.swift in Sources */,
 				524E925229701219001BCBD3 /* ContentView.swift in Sources */,
+				524E926429701265001BCBD3 /* PhotosViewModel.swift in Sources */,
 				524E925029701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift in Sources */,
 				524E925C2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld in Sources */,
 			);

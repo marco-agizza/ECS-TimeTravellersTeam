@@ -1,20 +1,24 @@
 //
-//  ECS_TimeTravellersTeamApp.swift
-//  ECS-TimeTravellersTeam
+//  ECS_TimeTravellersApp.swift
+//  ECS-TimeTravellers
 //
-//  Created by Marco Agizza on 12/01/23.
+//  Created by Marco Agizza on 10/01/23.
 //
 
 import SwiftUI
 
 @main
-struct ECS_TimeTravellersTeamApp: App {
+struct ECS_TimeTravellersApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(PhotosViewModel())
+                .onAppear {
+                    UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+                }
         }
     }
 }

@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  ECS-TimeTravellersTeam
+//  ECS-TimeTravellers
 //
-//  Created by Marco Agizza on 12/01/23.
+//  Created by Marco Agizza on 10/01/23.
 //
 
 import SwiftUI
@@ -10,35 +10,50 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    @EnvironmentObject var vm: PhotosViewModel
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
 
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+            VStack {
+                if let image = vm.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                } else {
+                    Image(systemName: "photo.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .opacity(0.6)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding(.horizontal)
+                }
+                Spacer()
+                HStack {
+                    Button {
+                        vm.source = .camera
+                        vm.showPhotoPicker()
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        Text("Camera")
+                    }
+                    
+                    Button {
+                        vm.source = .library
+                        vm.showPhotoPicker()
+                    } label: {
+                        Text("Photos")
                     }
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                .sheet(isPresented: $vm.showPicker) {
+                    ImagePicker(sourceType: vm.source == .library ? .photoLibrary : .camera, selectedImage: $vm.image)
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
+            }.navigationTitle("My images")
         }
     }
 
@@ -84,5 +99,6 @@ private let itemFormatter: DateFormatter = {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(PhotosViewModel())
     }
 }
