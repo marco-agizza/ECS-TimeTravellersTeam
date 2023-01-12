@@ -19,7 +19,7 @@ class PhotosViewModel: ObservableObject {
                 print ("There is no camera on this device")
                 return
             }
-            showPicker = true
         }
+        showPicker = true
     }
 }

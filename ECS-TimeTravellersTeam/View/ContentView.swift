@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  ContentView.swift
 //  ECS-TimeTravellers
 //
 //  Created by Marco Agizza on 10/01/23.
@@ -8,76 +8,92 @@
 import SwiftUI
 import CoreData
 
-struct MainView: View {
+struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var vm: PhotosViewModel
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
     
+    
     var body: some View {
         NavigationView {
             VStack {
-                GeometryReader { geometry in
+                if let image = vm.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(alignment: .center)
+                        .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                        .padding()
+                } else {
                     Rectangle()
                         .fill(Color.gray)
-                        .frame(width: 395, height: 550, alignment: .center)
-                        .cornerRadius(12.0)
+                        .frame(alignment: .center)
+                        .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                        .padding()
                         .overlay(
                             Image(systemName: "plus")
                                 .resizable(resizingMode: .stretch)
                                 .foregroundColor(.black)
-                                .frame(width: 100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0)
+                                .frame(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
                                 .font(.largeTitle)
                                 .padding())
                         .onTapGesture {
-                            // Perform action on tap
-                            print("Tapped")                                                }
-                    
-                    
+                            vm.source = .camera
+                            vm.showPhotoPicker()
+                            print("Tapped")
+                        }
                 }
+                Spacer()
                 Rectangle()
-                    .frame(width: 385.0, height: 60)
+                    .frame(height: 60, alignment: .center)
                     .foregroundColor(.white)
                     .offset(x: 0, y: 0)
                     .cornerRadius(12.0)
+                    .padding()
                     .overlay(
                         HStack{
                             Image(systemName: "note.text.badge.plus")
+                                .padding(.leading, 18)
+                                .padding(.trailing, 18)
                             VStack{
                                 Text("Story of the day")
                                     .font(.bold(.title3)())
                                 Text("Description...").font(.subheadline)
                                     .padding(.trailing, 49)
-                                
                             }
                             Spacer()
                         }
-                            .foregroundColor(.black)
-                            .font(.title)
-                            .padding())
+                        .foregroundColor(.black)
+                        .font(.title)
+                        .padding()
+                    )
                     .onTapGesture {
                         // Perform action on tap
                         print("Tapped")
-                        
                     }
-                Spacer()
-                
             }
-            .navigationBarTitle("Goodmorning")
-            .navigationBarItems(trailing:
-                                    Button(
-                                        action: {
-                                            // Perform button action
-                                        },
-                                        label: {
-                                            Image(systemName: "calendar.circle")
-                                                .foregroundColor(Color.white)
-                                                .font(.title)
-                                        }
-                                    ))
-            .cornerRadius(12.0)
+            .sheet(isPresented: $vm.showPicker) {
+                ImagePicker(sourceType: vm.source == .library ? .photoLibrary : .camera, selectedImage: $vm.image)
+            }
+            .navigationTitle("Good morning")
+            .navigationBarItems(
+                trailing:
+                    Button(
+                        action: {
+                            // Perform button action
+                        },
+                        label: {
+                            Image(systemName: "calendar.circle")
+                                .foregroundColor(Color.white)
+                                .font(.title)
+                        }
+                    )
+            )
+            .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
         }
     }
     
@@ -119,8 +135,10 @@ private let itemFormatter: DateFormatter = {
     return formatter
 }()
 
-struct MainView_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(PhotosViewModel())
     }
 }
