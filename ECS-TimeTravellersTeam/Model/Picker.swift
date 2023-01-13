@@ -7,8 +7,8 @@
 
 import UIKit
 
-enum Picker {
-    enum Source: String {
+enum PhotoPicker {
+    enum PhotoSource: String {
         case library, camera
     }
     
