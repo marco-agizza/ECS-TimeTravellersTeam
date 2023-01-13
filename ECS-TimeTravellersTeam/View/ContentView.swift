@@ -21,31 +21,32 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                if let image = vm.image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(alignment: .center)
-                        .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
-                        .padding()
-                } else {
+                ZStack{
                     Rectangle()
                         .fill(Color.gray)
-                        .frame(alignment: .center)
+                        .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/2, alignment: .center)
                         .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
                         .padding()
-                        .overlay(
-                            Image(systemName: "plus")
-                                .resizable(resizingMode: .stretch)
-                                .foregroundColor(.black)
-                                .frame(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
-                                .font(.largeTitle)
-                                .padding())
                         .onTapGesture {
                             vm.source = .camera
                             vm.showPhotoPicker()
                             print("Tapped")
                         }
+                    Image(systemName: "plus")
+                        .resizable(resizingMode: .stretch)
+                        .foregroundColor(.black)
+                        .frame(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
+                        .font(.largeTitle)
+                        .padding()
+                    if let image = vm.image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/2, alignment: .center)
+                            .aspectRatio(contentMode: .fill)
+                            .scaledToFit()
+                            .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                            .padding()
+                    }
                 }
                 Spacer()
                 Rectangle()
