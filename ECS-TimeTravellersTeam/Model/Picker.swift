@@ -11,9 +11,8 @@ enum PhotoPicker {
     enum PhotoSource: String {
         case library, camera
     }
-    
     static func checkPermissions() -> Bool {
-        if UIImagePickerController.isSourceTypeAvailable(.camera){
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
             return true
         } else {
             return false

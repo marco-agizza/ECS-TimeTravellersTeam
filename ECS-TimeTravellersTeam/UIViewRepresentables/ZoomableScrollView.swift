@@ -52,8 +52,5 @@ struct ZoomableScrollView<Content: View>: UIViewRepresentable {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
       return hostingController.view
     }
-    
-       
   }
 }
-
