@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		522480E02977EC6B00C12F6A /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522480DF2977EC6B00C12F6A /* LocationDataManager.swift */; };
 		524E925029701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E924F29701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift */; };
 		524E925229701219001BCBD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E925129701219001BCBD3 /* ContentView.swift */; };
 		524E92542970121A001BCBD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 524E92532970121A001BCBD3 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		522480DF2977EC6B00C12F6A /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		524E924C29701219001BCBD3 /* ECS-TimeTravellersTeam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECS-TimeTravellersTeam.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		524E924F29701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECS_TimeTravellersTeamApp.swift; sourceTree = "<group>"; };
 		524E925129701219001BCBD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				524E92662970126E001BCBD3 /* Picker.swift */,
+				522480DF2977EC6B00C12F6A /* LocationDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			files = (
 				524E9274297012C9001BCBD3 /* FileManager+Extension.swift in Sources */,
 				524E9271297012C0001BCBD3 /* ZoomableScrollView.swift in Sources */,
+				522480E02977EC6B00C12F6A /* LocationDataManager.swift in Sources */,
 				524E92592970121A001BCBD3 /* Persistence.swift in Sources */,
 				524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */,
 				524E92672970126E001BCBD3 /* Picker.swift in Sources */,
@@ -340,6 +344,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Library use";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera use";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Localization for pictures";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -372,6 +377,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Library use";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera use";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Localization for pictures";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
