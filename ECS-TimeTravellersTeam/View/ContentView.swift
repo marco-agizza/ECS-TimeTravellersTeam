@@ -7,10 +7,11 @@
 
 import SwiftUI
 import CoreData
+import Photos
 
 struct ContentView: View {
     @EnvironmentObject var photoVM: PhotosViewModel
-    
+    @StateObject var locationDataManager = LocationDataManager()
     
     var body: some View {
         NavigationView {
@@ -41,6 +42,8 @@ struct ContentView: View {
                             .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
                             .padding()
                     }
+                    
+                    
                 }
                 Spacer()
                 Rectangle()
@@ -67,32 +70,54 @@ struct ContentView: View {
                             .padding()
                     )
                     .onTapGesture {
-                        // Perform action on tap
-                        print("Tapped")
+                        print("story of the day")
+                        switch locationDataManager.locationManager.authorizationStatus {
+                        case .authorizedWhenInUse:  // Location services are available.
+                            // Insert code here of what should happen when Location services are authorized
+                            print("Your current location is:")
+                            print("Latitude: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")")
+                            print("Longitude: \(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")")
+                            
+                        case .restricted, .denied:  // Location services currently unavailable.
+                            // Insert code here of what should happen when Location services are NOT authorized
+                            print("Current location data was restricted or denied.")
+                        case .notDetermined:        // Authorization not determined yet.
+                            print("Finding your location...")
+                            //ProgressView()
+                        default:
+                            print("cazzo")
+                            //ProgressView()
+                        }
                     }
             }
-            .sheet(isPresented: $photoVM.photoPickerShowen) {
-                ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
-            }
-            .navigationTitle("Good morning")
-            .navigationBarItems(
-                trailing:
-                    Button(
-                        action: {
-                            // Perform button action
-                        },
-                        label: {
-                            Image(systemName: "calendar.circle")
-                                .foregroundColor(Color.white)
-                                .font(.title)
-                        }
-                    )
-            )
-            .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
         }
+        .sheet(isPresented: $photoVM.photoPickerShowen) {
+            ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
+        }
+        .navigationTitle("Good morning")
+        .navigationBarItems(
+            trailing:
+                Button(
+                    action: {
+                        print("apapapp")
+                        if let image = photoVM.image {
+                            if let assetId = image.imageAsset {
+                                print(assetId)
+                            }
+                        }
+                    },
+                    label: {
+                        Image(systemName: "calendar.circle")
+                            .foregroundColor(Color.white)
+                            .font(.title)
+                    }
+                )
+        )
+        .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
     }
-    
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
