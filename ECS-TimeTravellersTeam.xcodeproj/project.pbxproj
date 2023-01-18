@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B6CD1A929780EA60040793F /* ConditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CD1A829780EA60040793F /* ConditionViewModel.swift */; };
+		4B6CD1AB29780F1D0040793F /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CD1AA29780F1D0040793F /* Condition.swift */; };
 		524E925029701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E924F29701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift */; };
 		524E925229701219001BCBD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E925129701219001BCBD3 /* ContentView.swift */; };
 		524E92542970121A001BCBD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 524E92532970121A001BCBD3 /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B6CD1A829780EA60040793F /* ConditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionViewModel.swift; sourceTree = "<group>"; };
+		4B6CD1AA29780F1D0040793F /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		524E924C29701219001BCBD3 /* ECS-TimeTravellersTeam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECS-TimeTravellersTeam.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		524E924F29701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECS_TimeTravellersTeamApp.swift; sourceTree = "<group>"; };
 		524E925129701219001BCBD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				524E926329701265001BCBD3 /* PhotosViewModel.swift */,
+				4B6CD1A829780EA60040793F /* ConditionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 		524E92652970126E001BCBD3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4B6CD1AA29780F1D0040793F /* Condition.swift */,
 				524E92662970126E001BCBD3 /* Picker.swift */,
 			);
 			path = Model;
@@ -198,8 +204,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B6CD1AB29780F1D0040793F /* Condition.swift in Sources */,
 				524E9274297012C9001BCBD3 /* FileManager+Extension.swift in Sources */,
 				524E9271297012C0001BCBD3 /* ZoomableScrollView.swift in Sources */,
+				4B6CD1A929780EA60040793F /* ConditionViewModel.swift in Sources */,
 				524E92592970121A001BCBD3 /* Persistence.swift in Sources */,
 				524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */,
 				524E92672970126E001BCBD3 /* Picker.swift in Sources */,
