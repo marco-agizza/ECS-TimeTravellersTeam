@@ -9,43 +9,38 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var vm: PhotosViewModel
-    
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    @EnvironmentObject var photoVM: PhotosViewModel
     
     
     var body: some View {
         NavigationView {
             VStack {
-                if let image = vm.image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(alignment: .center)
-                        .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
-                        .padding()
-                } else {
+                ZStack{
                     Rectangle()
                         .fill(Color.gray)
-                        .frame(alignment: .center)
+                        .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/2, alignment: .center)
                         .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
                         .padding()
-                        .overlay(
-                            Image(systemName: "plus")
-                                .resizable(resizingMode: .stretch)
-                                .foregroundColor(.black)
-                                .frame(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
-                                .font(.largeTitle)
-                                .padding())
                         .onTapGesture {
-                            vm.source = .camera
-                            vm.showPhotoPicker()
+                            photoVM.photoSource = .camera
+                            photoVM.showPhotoPicker()
                             print("Tapped")
                         }
+                    Image(systemName: "plus")
+                        .resizable(resizingMode: .stretch)
+                        .foregroundColor(.black)
+                        .frame(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
+                        .font(.largeTitle)
+                        .padding()
+                    if let image = photoVM.image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/2, alignment: .center)
+                            .aspectRatio(contentMode: .fill)
+                            .scaledToFit()
+                            .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                            .padding()
+                    }
                 }
                 Spacer()
                 Rectangle()
@@ -67,17 +62,17 @@ struct ContentView: View {
                             }
                             Spacer()
                         }
-                        .foregroundColor(.black)
-                        .font(.title)
-                        .padding()
+                            .foregroundColor(.black)
+                            .font(.title)
+                            .padding()
                     )
                     .onTapGesture {
                         // Perform action on tap
                         print("Tapped")
                     }
             }
-            .sheet(isPresented: $vm.showPicker) {
-                ImagePicker(sourceType: vm.source == .library ? .photoLibrary : .camera, selectedImage: $vm.image)
+            .sheet(isPresented: $photoVM.photoPickerShowen) {
+                ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
             }
             .navigationTitle("Good morning")
             .navigationBarItems(
@@ -97,43 +92,7 @@ struct ContentView: View {
         }
     }
     
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-    
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-            
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
