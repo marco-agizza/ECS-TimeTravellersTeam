@@ -10,6 +10,7 @@ import CoreData
 
 struct ContentView: View {
     @EnvironmentObject var photoVM: PhotosViewModel
+    @State var showStoryView = false
     
     
     var body: some View {
@@ -19,7 +20,7 @@ struct ContentView: View {
                     Rectangle()
                         .fill(Color.gray)
                         .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/2, alignment: .center)
-                        .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                        .cornerRadius(12.0)
                         .padding()
                         .onTapGesture {
                             photoVM.photoSource = .camera
@@ -29,7 +30,7 @@ struct ContentView: View {
                     Image(systemName: "plus")
                         .resizable(resizingMode: .stretch)
                         .foregroundColor(.black)
-                        .frame(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
+                        .frame(width: 100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0)
                         .font(.largeTitle)
                         .padding()
                     if let image = photoVM.image {
@@ -38,7 +39,7 @@ struct ContentView: View {
                             .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/2, alignment: .center)
                             .aspectRatio(contentMode: .fill)
                             .scaledToFit()
-                            .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                            .cornerRadius(12.0)
                             .padding()
                     }
                 }
@@ -68,9 +69,18 @@ struct ContentView: View {
                     )
                     .onTapGesture {
                         // Perform action on tap
-                        print("Tapped")
+                        //StoryDayView()
+                        showStoryView = true
+                            
+                        
+                        
+                        //print("Tapped")
                     }
+                
             }
+            .sheet(isPresented: $showStoryView) {
+                        StoryDayView()
+                    }
             .sheet(isPresented: $photoVM.photoPickerShowen) {
                 ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
             }
@@ -88,7 +98,7 @@ struct ContentView: View {
                         }
                     )
             )
-            .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+            .cornerRadius(12.0)
         }
     }
     

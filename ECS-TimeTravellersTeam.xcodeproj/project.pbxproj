@@ -18,6 +18,7 @@
 		524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926E297012C0001BCBD3 /* ImagePicker.swift */; };
 		524E9271297012C0001BCBD3 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */; };
 		524E9274297012C9001BCBD3 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E9273297012C9001BCBD3 /* FileManager+Extension.swift */; };
+		DBCF49BC2977EF3F00F82679 /* StoryDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCF49BB2977EF3F00F82679 /* StoryDayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		524E926E297012C0001BCBD3 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		524E9273297012C9001BCBD3 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		DBCF49BB2977EF3F00F82679 /* StoryDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				524E925129701219001BCBD3 /* ContentView.swift */,
+				DBCF49BB2977EF3F00F82679 /* StoryDayView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -138,7 +141,6 @@
 				524E924829701219001BCBD3 /* Sources */,
 				524E924929701219001BCBD3 /* Frameworks */,
 				524E924A29701219001BCBD3 /* Resources */,
-				4B36214D297172230003FB7B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -194,26 +196,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		4B36214D297172230003FB7B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		524E924829701219001BCBD3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -226,6 +208,7 @@
 				524E92672970126E001BCBD3 /* Picker.swift in Sources */,
 				524E925229701219001BCBD3 /* ContentView.swift in Sources */,
 				524E926429701265001BCBD3 /* PhotosViewModel.swift in Sources */,
+				DBCF49BC2977EF3F00F82679 /* StoryDayView.swift in Sources */,
 				524E925029701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift in Sources */,
 				524E925C2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld in Sources */,
 			);
