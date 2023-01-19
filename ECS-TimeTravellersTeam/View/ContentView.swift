@@ -11,6 +11,7 @@ import Photos
 
 struct ContentView: View {
     @EnvironmentObject var photoVM: PhotosViewModel
+    @EnvironmentObject var weatherConditionVM: ConditionViewModel
     @StateObject var locationDataManager = LocationDataManager()
     
     var body: some View {
@@ -42,8 +43,6 @@ struct ContentView: View {
                             .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
                             .padding()
                     }
-                    
-                    
                 }
                 Spacer()
                 Rectangle()
@@ -75,8 +74,16 @@ struct ContentView: View {
                         case .authorizedWhenInUse:  // Location services are available.
                             // Insert code here of what should happen when Location services are authorized
                             print("Your current location is:")
-                            print("Latitude: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")")
-                            print("Longitude: \(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")")
+                            var currentLatitude = locationDataManager.locationManager.location?.coordinate.latitude
+                            var currentLongitude = locationDataManager.locationManager.location?.coordinate.longitude
+                            print ("latitude: \(currentLatitude!); longitude: \(currentLongitude!)")
+                            /*print("Latitude: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")")
+                             print("Longitude: \(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")")*/
+                            if currentLatitude != nil && currentLongitude != nil {
+                                Task {
+                                    try await weatherConditionVM.getCondition(latitude: currentLatitude!, longitude: currentLongitude!)
+                                }
+                            }
                             
                         case .restricted, .denied:  // Location services currently unavailable.
                             // Insert code here of what should happen when Location services are NOT authorized

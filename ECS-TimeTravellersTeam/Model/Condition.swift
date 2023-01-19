@@ -8,12 +8,9 @@
 import Foundation
 
 struct Condition: Decodable {
-
   var temperature : Int?    = nil
   var text        : String? = nil
   var code        : Int?    = nil
-
-
 }
 
 struct YMCurrentObservation: Decodable {
