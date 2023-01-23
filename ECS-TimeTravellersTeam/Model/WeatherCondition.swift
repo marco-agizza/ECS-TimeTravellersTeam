@@ -7,19 +7,16 @@
 
 import Foundation
 
-struct Condition: Decodable {
-
+struct WeatherCondition: Decodable {
   var temperature : Int?    = nil
   var text        : String? = nil
   var code        : Int?    = nil
-
-
 }
 
 struct YMCurrentObservation: Decodable {
-    var condition: Condition
+    var condition: WeatherCondition
 }
 
 struct YMResponse: Decodable {
-    var current_observation: YMCurrentObservation
+    var currentObservation: YMCurrentObservation
 }
