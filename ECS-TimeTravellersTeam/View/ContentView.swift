@@ -36,10 +36,10 @@ struct ContentView: View {
                       
                             
                             Image(systemName: "plus")
-                                .resizable(resizingMode: .stretch)
                                 .foregroundColor(.black)
-                                .frame(width: geometry.size.width * 0.2, height: geometry.size.height * 0.2)
                                 .padding()
+                                .font(.system(size: 70))
+
                         }
                         
                         if let image = photoVM.image {
@@ -86,7 +86,7 @@ struct ContentView: View {
                         VStack {
                             Spacer()
                         Rectangle()
-                            .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 0.2)
+                            .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 0.25)
                             .foregroundColor(.white)
                             .cornerRadius(12.0)
                             .padding()
