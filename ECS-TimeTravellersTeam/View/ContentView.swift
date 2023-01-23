@@ -32,13 +32,16 @@ struct ContentView: View {
                                     photoVM.showPhotoPicker()
                                     print("Tapped")
                                 }
+                                .opacity(0.6)
+                                
                             
                       
                             
-                            Image(systemName: "plus")
+                            Image(systemName: "photo.on.rectangle.angled")
                                 .foregroundColor(.black)
                                 .padding()
-                                .font(.system(size: 70))
+                                .font(.system(size: 130))
+                                
 
                         }
                         
