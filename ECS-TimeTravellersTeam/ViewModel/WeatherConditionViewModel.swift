@@ -11,7 +11,7 @@ import SwiftUI
 class WeatherConditionViewModel: ObservableObject {
     /// Struct to match JSON `Data`
     @Published var weatherCondition: WeatherCondition?
-    @Published var statusCode: Int?
+    @Published var statusCode: Int = 200
     @Published var anErrorOccurred: Bool = false
     
     /// Create a urlSession object, use this to perform requests

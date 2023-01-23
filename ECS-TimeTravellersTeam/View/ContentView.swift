@@ -101,6 +101,11 @@ struct ContentView: View {
         .sheet(isPresented: $photoVM.photoPickerShowen) {
             ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
         }
+        .alert("Connection error. Status code: \(weatherConditionVM.statusCode)", isPresented: $weatherConditionVM.anErrorOccurred){
+            Button("OK", role: .cancel){
+                weatherConditionVM.anErrorOccurred = false
+            }
+        }
         
         .navigationTitle("Good morning")
         .navigationBarItems(
