@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct alertView: View {
+struct AlertView: View {
     @State private var showingAlert = false
     var body: some View {
         Button("Show Alert") {
@@ -22,6 +22,6 @@ struct alertView: View {
 
 struct alertView_Previews: PreviewProvider {
     static var previews: some View {
-        alertView()
+        AlertView()
     }
 }

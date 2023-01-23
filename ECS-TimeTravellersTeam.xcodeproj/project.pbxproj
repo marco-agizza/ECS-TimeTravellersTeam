@@ -21,7 +21,7 @@
 		524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926E297012C0001BCBD3 /* ImagePicker.swift */; };
 		524E9271297012C0001BCBD3 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */; };
 		524E9274297012C9001BCBD3 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E9273297012C9001BCBD3 /* FileManager+Extension.swift */; };
-		DB26829C297E9851002FCA7B /* alertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26829B297E9851002FCA7B /* alertView.swift */; };
+		DB26829C297E9851002FCA7B /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26829B297E9851002FCA7B /* AlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 		524E926E297012C0001BCBD3 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		524E9273297012C9001BCBD3 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
-		DB26829B297E9851002FCA7B /* alertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertView.swift; sourceTree = "<group>"; };
+		DB26829B297E9851002FCA7B /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				524E925129701219001BCBD3 /* ContentView.swift */,
-				DB26829B297E9851002FCA7B /* alertView.swift */,
+				DB26829B297E9851002FCA7B /* AlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -217,7 +217,7 @@
 				522480E02977EC6B00C12F6A /* LocationDataManager.swift in Sources */,
 				524E92592970121A001BCBD3 /* Persistence.swift in Sources */,
 				524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */,
-				DB26829C297E9851002FCA7B /* alertView.swift in Sources */,
+				DB26829C297E9851002FCA7B /* AlertView.swift in Sources */,
 				524E92672970126E001BCBD3 /* Picker.swift in Sources */,
 				524E925229701219001BCBD3 /* ContentView.swift in Sources */,
 				524E926429701265001BCBD3 /* PhotosViewModel.swift in Sources */,
