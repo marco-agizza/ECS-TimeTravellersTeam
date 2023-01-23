@@ -24,6 +24,7 @@
 		524E9274297012C9001BCBD3 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E9273297012C9001BCBD3 /* FileManager+Extension.swift */; };
 		528252AD297D9B9B00BE6BAC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528252AC297D9B9B00BE6BAC /* NetworkError.swift */; };
 		6E4CD127297E9A5B0076910D /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4CD126297E9A5B0076910D /* ArchiveView.swift */; };
+		DB26829E297EA7D9002FCA7B /* DayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26829D297EA7D9002FCA7B /* DayRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		524E9273297012C9001BCBD3 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		528252AC297D9B9B00BE6BAC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		6E4CD126297E9A5B0076910D /* ArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
+		DB26829D297EA7D9002FCA7B /* DayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			children = (
 				524E925129701219001BCBD3 /* ContentView.swift */,
 				6E4CD126297E9A5B0076910D /* ArchiveView.swift */,
+				DB26829D297EA7D9002FCA7B /* DayRow.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				524E925229701219001BCBD3 /* ContentView.swift in Sources */,
 				524E926429701265001BCBD3 /* PhotosViewModel.swift in Sources */,
 				528252AD297D9B9B00BE6BAC /* NetworkError.swift in Sources */,
+				DB26829E297EA7D9002FCA7B /* DayRow.swift in Sources */,
 				524E925029701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift in Sources */,
 				524E925C2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld in Sources */,
 			);
