@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
-		4B6CD1A929780EA60040793F /* ConditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CD1A829780EA60040793F /* ConditionViewModel.swift */; };
-		4B6CD1AB29780F1D0040793F /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CD1AA29780F1D0040793F /* Condition.swift */; };
+		4B6CD1A929780EA60040793F /* WeatherConditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CD1A829780EA60040793F /* WeatherConditionViewModel.swift */; };
+		4B6CD1AB29780F1D0040793F /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CD1AA29780F1D0040793F /* WeatherCondition.swift */; };
 		522480E02977EC6B00C12F6A /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522480DF2977EC6B00C12F6A /* LocationDataManager.swift */; };
+		5232709C297E8D6700B387F5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232709B297E8D6700B387F5 /* Utils.swift */; };
 		524E925029701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E924F29701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift */; };
 		524E925229701219001BCBD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E925129701219001BCBD3 /* ContentView.swift */; };
 		524E92542970121A001BCBD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 524E92532970121A001BCBD3 /* Assets.xcassets */; };
@@ -22,12 +22,14 @@
 		524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926E297012C0001BCBD3 /* ImagePicker.swift */; };
 		524E9271297012C0001BCBD3 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */; };
 		524E9274297012C9001BCBD3 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E9273297012C9001BCBD3 /* FileManager+Extension.swift */; };
+		528252AD297D9B9B00BE6BAC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528252AC297D9B9B00BE6BAC /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4B6CD1A829780EA60040793F /* ConditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionViewModel.swift; sourceTree = "<group>"; };
-		4B6CD1AA29780F1D0040793F /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
+		4B6CD1A829780EA60040793F /* WeatherConditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditionViewModel.swift; sourceTree = "<group>"; };
+		4B6CD1AA29780F1D0040793F /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		522480DF2977EC6B00C12F6A /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
+		5232709B297E8D6700B387F5 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		524E924C29701219001BCBD3 /* ECS-TimeTravellersTeam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECS-TimeTravellersTeam.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		524E924F29701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECS_TimeTravellersTeamApp.swift; sourceTree = "<group>"; };
 		524E925129701219001BCBD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,6 +42,7 @@
 		524E926E297012C0001BCBD3 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		524E9273297012C9001BCBD3 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		528252AC297D9B9B00BE6BAC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				524E924F29701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift */,
+				528252AB297D9B8B00BE6BAC /* Network */,
 				524E926229701265001BCBD3 /* ViewModel */,
 				524E92652970126E001BCBD3 /* Model */,
 				524E926829701279001BCBD3 /* View */,
@@ -82,6 +86,7 @@
 				524E926D297012C0001BCBD3 /* UIViewRepresentables */,
 				524E9272297012C9001BCBD3 /* Extensions */,
 				524E92552970121A001BCBD3 /* Preview Content */,
+				5232709B297E8D6700B387F5 /* Utils.swift */,
 			);
 			path = "ECS-TimeTravellersTeam";
 			sourceTree = "<group>";
@@ -98,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				524E926329701265001BCBD3 /* PhotosViewModel.swift */,
-				4B6CD1A829780EA60040793F /* ConditionViewModel.swift */,
+				4B6CD1A829780EA60040793F /* WeatherConditionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -106,7 +111,7 @@
 		524E92652970126E001BCBD3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4B6CD1AA29780F1D0040793F /* Condition.swift */,
+				4B6CD1AA29780F1D0040793F /* WeatherCondition.swift */,
 				524E92662970126E001BCBD3 /* Picker.swift */,
 				522480DF2977EC6B00C12F6A /* LocationDataManager.swift */,
 			);
@@ -136,6 +141,14 @@
 				524E9273297012C9001BCBD3 /* FileManager+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		528252AB297D9B8B00BE6BAC /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				528252AC297D9B9B00BE6BAC /* NetworkError.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,16 +221,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B6CD1AB29780F1D0040793F /* Condition.swift in Sources */,
+				4B6CD1AB29780F1D0040793F /* WeatherCondition.swift in Sources */,
 				524E9274297012C9001BCBD3 /* FileManager+Extension.swift in Sources */,
 				524E9271297012C0001BCBD3 /* ZoomableScrollView.swift in Sources */,
-				4B6CD1A929780EA60040793F /* ConditionViewModel.swift in Sources */,
+				5232709C297E8D6700B387F5 /* Utils.swift in Sources */,
+				4B6CD1A929780EA60040793F /* WeatherConditionViewModel.swift in Sources */,
 				522480E02977EC6B00C12F6A /* LocationDataManager.swift in Sources */,
 				524E92592970121A001BCBD3 /* Persistence.swift in Sources */,
 				524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */,
 				524E92672970126E001BCBD3 /* Picker.swift in Sources */,
 				524E925229701219001BCBD3 /* ContentView.swift in Sources */,
 				524E926429701265001BCBD3 /* PhotosViewModel.swift in Sources */,
+				528252AD297D9B9B00BE6BAC /* NetworkError.swift in Sources */,
 				524E925029701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift in Sources */,
 				524E925C2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld in Sources */,
 			);

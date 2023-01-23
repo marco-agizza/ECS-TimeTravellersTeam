@@ -11,8 +11,9 @@ import Photos
 
 struct ContentView: View {
     @EnvironmentObject var photoVM: PhotosViewModel
-    @EnvironmentObject var weatherConditionVM: ConditionViewModel
+    @EnvironmentObject var weatherConditionVM: WeatherConditionViewModel
     @StateObject var locationDataManager = LocationDataManager()
+    @State var weatherConditions : String = "default"
     
     var body: some View {
         NavigationView {
@@ -45,6 +46,10 @@ struct ContentView: View {
                     }
                 }
                 Spacer()
+                if let weatherCondition = weatherConditionVM.weatherCondition {
+                    Text("Temperature: "+String(weatherCondition.temperature ?? 0))
+                    Text("State: "+String(weatherCondition.text ?? "None"))
+                }
                 Rectangle()
                     .frame(height: 60, alignment: .center)
                     .foregroundColor(.white)
@@ -73,18 +78,12 @@ struct ContentView: View {
                         switch locationDataManager.locationManager.authorizationStatus {
                         case .authorizedWhenInUse:  // Location services are available.
                             // Insert code here of what should happen when Location services are authorized
-                            print("Your current location is:")
-                            var currentLatitude = locationDataManager.locationManager.location?.coordinate.latitude
-                            var currentLongitude = locationDataManager.locationManager.location?.coordinate.longitude
-                            print ("latitude: \(currentLatitude!); longitude: \(currentLongitude!)")
-                            /*print("Latitude: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")")
-                             print("Longitude: \(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")")*/
-                            if currentLatitude != nil && currentLongitude != nil {
+                            if let currentLatitude = locationDataManager.locationManager.location?.coordinate.latitude, let currentLongitude = locationDataManager.locationManager.location?.coordinate.longitude {
                                 Task {
-                                    try await weatherConditionVM.getCondition(latitude: currentLatitude!, longitude: currentLongitude!)
+                                    try await weatherConditionVM.getWeatherConditions(path: "/weather", latitude: currentLatitude.truncate(places: 1), longitude: currentLongitude.truncate(places: 1))
                                 }
+                                //Text(String(weatherConditionVM.weatherCondition?.temperature ?? 0))
                             }
-                            
                         case .restricted, .denied:  // Location services currently unavailable.
                             // Insert code here of what should happen when Location services are NOT authorized
                             print("Current location data was restricted or denied.")
@@ -97,10 +96,12 @@ struct ContentView: View {
                         }
                     }
             }
+            
         }
         .sheet(isPresented: $photoVM.photoPickerShowen) {
             ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
         }
+        
         .navigationTitle("Good morning")
         .navigationBarItems(
             trailing:
