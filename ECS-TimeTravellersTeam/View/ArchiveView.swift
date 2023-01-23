@@ -83,6 +83,7 @@ private let itemFormatter: DateFormatter = {
 
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ArchiveView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
