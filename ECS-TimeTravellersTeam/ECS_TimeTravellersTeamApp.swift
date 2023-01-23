@@ -16,7 +16,7 @@ struct ECS_TimeTravellersApp: App {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(PhotosViewModel())
-                .environmentObject(ConditionViewModel())
+                .environmentObject(WeatherConditionViewModel())
                 .onAppear {
                     UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
                 }
