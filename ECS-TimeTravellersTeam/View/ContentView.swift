@@ -45,6 +45,26 @@ struct ContentView: View {
                             .padding()
                     }
                 }
+                
+                .navigationTitle("Good morning")
+                .navigationBarItems(
+                    trailing:
+                        Button(
+                            action: {
+                                print("apapapp")
+                                if let image = photoVM.image {
+                                    if let assetId = image.imageAsset {
+                                        print(assetId)
+                                    }
+                                }
+                            },
+                            label: {
+                                Image(systemName: "calendar.circle")
+                                    .foregroundColor(Color.white)
+                                    .font(.title)
+                            }
+                        )
+                )
                 Spacer()
                 if let weatherCondition = weatherConditionVM.weatherCondition {
                     Text("Temperature: "+String(weatherCondition.temperature ?? 0))
@@ -107,25 +127,7 @@ struct ContentView: View {
             }
         }
         
-        .navigationTitle("Good morning")
-        .navigationBarItems(
-            trailing:
-                Button(
-                    action: {
-                        print("apapapp")
-                        if let image = photoVM.image {
-                            if let assetId = image.imageAsset {
-                                print(assetId)
-                            }
-                        }
-                    },
-                    label: {
-                        Image(systemName: "calendar.circle")
-                            .foregroundColor(Color.white)
-                            .font(.title)
-                    }
-                )
-        )
+
         .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
     }
 }
@@ -137,5 +139,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .environmentObject(PhotosViewModel())
+            .environmentObject(WeatherConditionViewModel())
     }
 }
