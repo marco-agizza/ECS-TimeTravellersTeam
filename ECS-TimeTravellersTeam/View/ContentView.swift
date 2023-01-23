@@ -22,7 +22,7 @@ struct ContentView: View {
                     Rectangle()
                         .fill(Color.gray)
                         .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/2, alignment: .center)
-                        .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                        .cornerRadius(12.0)
                         .padding()
                         .onTapGesture {
                             photoVM.photoSource = .camera
@@ -32,7 +32,7 @@ struct ContentView: View {
                     Image(systemName: "plus")
                         .resizable(resizingMode: .stretch)
                         .foregroundColor(.black)
-                        .frame(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
+                        .frame(width: 100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0)
                         .font(.largeTitle)
                         .padding()
                     if let image = photoVM.image {
@@ -41,7 +41,7 @@ struct ContentView: View {
                             .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/2, alignment: .center)
                             .aspectRatio(contentMode: .fill)
                             .scaledToFit()
-                            .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                            .cornerRadius(12.0)
                             .padding()
                     }
                 }
@@ -49,21 +49,25 @@ struct ContentView: View {
                 .navigationTitle("Good morning")
                 .navigationBarItems(
                     trailing:
-                        Button(
-                            action: {
-                                print("apapapp")
-                                if let image = photoVM.image {
-                                    if let assetId = image.imageAsset {
-                                        print(assetId)
+                        NavigationLink(destination: ArchiveView()) {
+                        
+                            Button(
+                                action: {
+                                    print("apapapp")
+                                    if let image = photoVM.image {
+                                        if let assetId = image.imageAsset {
+                                            print(assetId)
+                                        }
                                     }
+                                },
+                                
+                                label: {
+                                    Image(systemName: "calendar.circle")
+                                        .foregroundColor(Color.white)
+                                        .font(.title)
                                 }
-                            },
-                            label: {
-                                Image(systemName: "calendar.circle")
-                                    .foregroundColor(Color.white)
-                                    .font(.title)
-                            }
-                        )
+                            )
+                    }
                 )
                 Spacer()
                 if let weatherCondition = weatherConditionVM.weatherCondition {
@@ -122,8 +126,8 @@ struct ContentView: View {
             ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
         }
         
-
-        .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+        
+        .cornerRadius(12.0)
     }
 }
 
