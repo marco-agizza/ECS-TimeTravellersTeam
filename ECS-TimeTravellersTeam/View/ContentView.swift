@@ -22,7 +22,7 @@ struct ContentView: View {
                     GeometryReader { geometry in
                         Rectangle()
                             .fill(Color.gray)
-                            .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 0.9, alignment: .center)
+                            .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
                             .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
                             .padding()
                             .onTapGesture {
@@ -34,7 +34,7 @@ struct ContentView: View {
                         if let image = photoVM.image {
                             Image(uiImage: image)
                                 .resizable()
-                                .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 0.9, alignment: .center)
+                                .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
                                 .aspectRatio(contentMode: .fill)
                                 .scaledToFit()
                                 .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
@@ -73,54 +73,56 @@ struct ContentView: View {
                     Text("Temperature: "+String(weatherCondition.temperature ?? 0))
                     Text("State: "+String(weatherCondition.text ?? "None"))
                 }
-                Spacer()
                 
-                GeometryReader { geometry in
-                    Rectangle()
-                        .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 0.2, alignment: .center)
-                        .foregroundColor(.white)
-                        .offset(x: 0, y: 0)
-                        .cornerRadius(12.0)
-                        .padding()
-                        .overlay(
-                            HStack{
-                                Image(systemName: "note.text.badge.plus")
-                                    .padding(.leading, 18)
-                                    .padding(.trailing, 18)
-                                VStack{
-                                    Text("Story of the day")
-                                        .font(.bold(.title3)())
-                                    Text("Description...").font(.subheadline)
-                                        .padding(.trailing, 49)
-                                }
-                                Spacer()
-                            }
-                                .foregroundColor(.black)
-                                .font(.title)
-                                .padding()
-                        )
-                        .onTapGesture {
-                            print("story of the day")
-                            switch locationDataManager.locationManager.authorizationStatus {
-                            case .authorizedWhenInUse:  // Location services are available.
-                                // Insert code here of what should happen when Location services are authorized
-                                if let currentLatitude = locationDataManager.locationManager.location?.coordinate.latitude, let currentLongitude = locationDataManager.locationManager.location?.coordinate.longitude {
-                                    Task {
-                                        try await weatherConditionVM.getWeatherConditions(path: "/weather", latitude: currentLatitude.truncate(places: 1), longitude: currentLongitude.truncate(places: 1))
+               
+                    GeometryReader { geometry in
+                        VStack {
+                            Spacer()
+                        Rectangle()
+                            .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 0.2)
+                            .foregroundColor(.white)
+                            .cornerRadius(12.0)
+                            .padding()
+                            .overlay(
+                                HStack{
+                                    Image(systemName: "note.text.badge.plus")
+                                        .padding(.leading, 18)
+                                        .padding(.trailing, 18)
+                                    VStack{
+                                        Text("Story of the day")
+                                            .font(.bold(.title3)())
+                                        Text("Description...").font(.subheadline)
+                                            .padding(.trailing, 49)
                                     }
-                                    //Text(String(weatherConditionVM.weatherCondition?.temperature ?? 0))
+                                    Spacer()
                                 }
-                            case .restricted, .denied:  // Location services currently unavailable.
-                                // Insert code here of what should happen when Location services are NOT authorized
-                                print("Current location data was restricted or denied.")
-                            case .notDetermined:        // Authorization not determined yet.
-                                print("Finding your location...")
-                                //ProgressView()
-                            default:
-                                print("cazzo")
-                                //ProgressView()
+                                    .foregroundColor(.black)
+                                    .font(.title)
+                                    .padding()
+                            )
+                            .onTapGesture {
+                                print("story of the day")
+                                switch locationDataManager.locationManager.authorizationStatus {
+                                case .authorizedWhenInUse:  // Location services are available.
+                                    // Insert code here of what should happen when Location services are authorized
+                                    if let currentLatitude = locationDataManager.locationManager.location?.coordinate.latitude, let currentLongitude = locationDataManager.locationManager.location?.coordinate.longitude {
+                                        Task {
+                                            try await weatherConditionVM.getWeatherConditions(path: "/weather", latitude: currentLatitude.truncate(places: 1), longitude: currentLongitude.truncate(places: 1))
+                                        }
+                                        //Text(String(weatherConditionVM.weatherCondition?.temperature ?? 0))
+                                    }
+                                case .restricted, .denied:  // Location services currently unavailable.
+                                    // Insert code here of what should happen when Location services are NOT authorized
+                                    print("Current location data was restricted or denied.")
+                                case .notDetermined:        // Authorization not determined yet.
+                                    print("Finding your location...")
+                                    //ProgressView()
+                                default:
+                                    print("cazzo")
+                                    //ProgressView()
+                                }
                             }
-                        }
+                    }
                 }
             }
         }
