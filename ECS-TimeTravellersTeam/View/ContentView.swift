@@ -14,7 +14,8 @@ struct ContentView: View {
     @EnvironmentObject var weatherConditionVM: WeatherConditionViewModel
     @StateObject var locationDataManager = LocationDataManager()
     @State var weatherConditions : String = "default"
-    
+    @State private var showArchiveView = false
+
     var body: some View {
         NavigationView {
             VStack {
@@ -49,10 +50,10 @@ struct ContentView: View {
                 .navigationTitle("Good morning")
                 .navigationBarItems(
                     trailing:
-                        NavigationLink(destination: ArchiveView()) {
-                        
+                        NavigationLink(destination: ArchiveView(), isActive: $showArchiveView) {
                             Button(
                                 action: {
+                                    showArchiveView = true
                                     print("apapapp")
                                     if let image = photoVM.image {
                                         if let assetId = image.imageAsset {
@@ -67,7 +68,7 @@ struct ContentView: View {
                                         .font(.title)
                                 }
                             )
-                    }
+                        }
                 )
                 Spacer()
                 if let weatherCondition = weatherConditionVM.weatherCondition {

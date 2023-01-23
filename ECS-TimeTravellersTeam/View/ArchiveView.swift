@@ -36,15 +36,7 @@ struct ArchiveView: View {
 
                 
             }
-            .toolbar {
-                
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(Color.blue)
-                     
-
-                }
-                }
+          
             }
             Text("Select an item")
         }
