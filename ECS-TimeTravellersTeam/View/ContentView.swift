@@ -20,16 +20,25 @@ struct ContentView: View {
             VStack {
                 ZStack{
                     GeometryReader { geometry in
-                        Rectangle()
-                            .fill(Color.gray)
-                            .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
-                            .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
-                            .padding()
-                            .onTapGesture {
-                                photoVM.photoSource = .camera
-                                photoVM.showPhotoPicker()
-                                print("Tapped")
-                            }
+                        ZStack{
+                            
+                            Rectangle()
+                                .fill(Color.gray)
+                                .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
+                                .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                                .padding()
+                                .onTapGesture {
+                                    photoVM.photoSource = .camera
+                                    photoVM.showPhotoPicker()
+                                    print("Tapped")
+                                }
+                            
+                            Image(systemName: "plus")
+                                .resizable(resizingMode: .stretch)
+                                .foregroundColor(.black)
+                                .frame(width: geometry.size.width * 0.2, height: geometry.size.height * 0.2)
+                                .padding()
+                        }
                         
                         if let image = photoVM.image {
                             Image(uiImage: image)
@@ -42,12 +51,7 @@ struct ContentView: View {
                         }
                         
                     }
-                    Image(systemName: "plus")
-                        .resizable(resizingMode: .stretch)
-                        .foregroundColor(.black)
-                        .frame(width: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
-                        .font(.largeTitle)
-                        .padding()
+                    
                 }
                 .navigationTitle("Good morning")
                 .navigationBarItems(
