@@ -135,7 +135,9 @@ struct ContentView: View {
                     }
                 }
             }
+            
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: $photoVM.photoPickerShowen) {
             ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
         }
@@ -148,6 +150,7 @@ struct ContentView: View {
 
         .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
     }
+    
 }
 
 
