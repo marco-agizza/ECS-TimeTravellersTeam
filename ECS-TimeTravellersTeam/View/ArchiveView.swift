@@ -7,7 +7,7 @@
 
 import SwiftUI
 import CoreData
-
+/*
 struct ArchiveView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -87,3 +87,4 @@ struct ArchiveView_Previews: PreviewProvider {
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+*/
