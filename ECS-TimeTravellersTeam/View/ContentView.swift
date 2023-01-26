@@ -7,7 +7,6 @@
 
 import SwiftUI
 import CoreData
-import Photos
 
 struct ContentView: View {
     @EnvironmentObject var photoVM: PhotosViewModel

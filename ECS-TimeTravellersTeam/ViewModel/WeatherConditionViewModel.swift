@@ -11,7 +11,7 @@ import SwiftUI
 class WeatherConditionViewModel: ObservableObject {
     /// Struct to match JSON `Data`
     @Published var weatherCondition: WeatherCondition?
-    @Published var statusCode: Int = 200
+    @Published var statusCode: String = "200"
     @Published var anErrorOccurred: Bool = false
     
     /// Create a urlSession object, use this to perform requests
@@ -89,7 +89,7 @@ class WeatherConditionViewModel: ObservableObject {
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             if let httpResponse = response as? HTTPURLResponse {
-                statusCode = httpResponse.statusCode
+                statusCode = "\(httpResponse.statusCode)"
                 guard httpResponse.statusCode == 200 else {
                     print("error in get response with status code: \(httpResponse.statusCode)")
                     anErrorOccurred = true
