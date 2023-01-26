@@ -23,14 +23,10 @@ struct ContentView: View {
                             
                             Rectangle()
                                 .fill(Color.gray)
-                                .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
+                                .frame(width: geometry.size.width * 0.91, height: geometry.size.height * 1.5, alignment: .center)
                                 .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
                                 .padding()
-                                .onTapGesture {
-                                    photoVM.photoSource = .camera
-                                    photoVM.showPhotoPicker()
-                                    print("Tapped")
-                                }
+                              
                                 .opacity(0.6)
                                 
                             
@@ -41,14 +37,20 @@ struct ContentView: View {
                                 .padding()
                                 .font(.system(size: 130))
                                 
+                               
 
+                        }
+                        .onTapGesture {
+                            photoVM.photoSource = .camera
+                            photoVM.showPhotoPicker()
+                            print("Tapped")
                         }
                         
                         if let image = photoVM.image {
                             Image(uiImage: image)
                                 .resizable()
                                 .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
-                                .aspectRatio(contentMode: .fill)
+                                .aspectRatio(contentMode: .fit)
                                 .scaledToFit()
                                 .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
                                 .padding()
@@ -134,9 +136,8 @@ struct ContentView: View {
                     }
                 }
             }
-            
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+    .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: $photoVM.photoPickerShowen) {
             ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
         }
@@ -145,8 +146,6 @@ struct ContentView: View {
                 weatherConditionVM.anErrorOccurred = false
             }
         }
-        
-
         .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
     }
     
