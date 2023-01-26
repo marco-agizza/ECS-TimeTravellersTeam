@@ -13,6 +13,14 @@ struct ContentView: View {
     @EnvironmentObject var weatherConditionVM: WeatherConditionViewModel
     @StateObject var locationDataManager = LocationDataManager()
     @State var weatherConditions : String = "default"
+    @State var isStoryPresented : Bool = false
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Moment.date, ascending: true)],
+        animation: .default)
+    private var moments: FetchedResults<Moment>
     
     var body: some View {
         NavigationView {
@@ -53,6 +61,8 @@ struct ContentView: View {
                                 .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
                                 .padding()
                         }
+                        
+                        
                        
                         
                     }
@@ -131,10 +141,23 @@ struct ContentView: View {
                                     //ProgressView()
                                 }
                             }
+                            
                     }
                 }
+                    
+                    NavigationLink(destination: StoryDayView()) {
+                        Text("Modal")
+                    }
+                Spacer()
+                    NavigationLink(destination: ArchiveView()) {
+                    Text("Archive")
+                }
+                Button("Add image") {
+                    additem()
+                }.buttonStyle(.borderedProminent)
             }
         }
+    
         .sheet(isPresented: $photoVM.photoPickerShowen) {
             ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
         }
@@ -147,6 +170,44 @@ struct ContentView: View {
 
         .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
     }
+    
+    
+    private func addImage(){
+        let pngImageData  = (photoVM.image!).pngData()
+        let moment = Moment(context: viewContext)
+        moment.picture = pngImageData
+    }
+    
+    
+    
+    
+    private func additem() {
+        if let image = photoVM.image
+        {
+            let entityName = NSEntityDescription.entity(forEntityName: "Moment", in: viewContext)!
+            let imageToStore = NSManagedObject(entity: entityName, insertInto: viewContext)
+            withAnimation {
+                let moment = Moment(context: viewContext)
+                let pngImageData = image.pngData()
+                imageToStore.setValue(pngImageData, forKey: "picture")
+                
+                saveContext()
+            }
+            
+        }
+    
+        
+        
+    }
+    
+    private func saveContext() {
+        do {
+            try viewContext.save()
+        } catch {
+            let error = error as NSError
+            fatalError("An error occured: \(error)")
+        }
+    }
 }
 
 
@@ -154,7 +215,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .environmentObject(PhotosViewModel())
             .environmentObject(WeatherConditionViewModel())
     }
