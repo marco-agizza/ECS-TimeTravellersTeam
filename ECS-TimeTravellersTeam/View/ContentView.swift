@@ -37,11 +37,11 @@ struct ContentView: View {
                                 .foregroundColor(blink ? Color.gray : Color.white)
                                     .padding()
                                     .font(.system(size: 130))
-                                    .opacity(blink ? 0.2 : 0.8)
+                                    .opacity(blink ? 0.2 : 0.6)
                                     .onAppear {
                                             self.blink.toggle()
                                         }
-                                    .animation(Animation.easeOut(duration: 2).repeatForever(autoreverses: true))
+                                    .animation(Animation.easeOut(duration: 2.5).repeatForever(autoreverses: true))
                                   
                             
                         }
