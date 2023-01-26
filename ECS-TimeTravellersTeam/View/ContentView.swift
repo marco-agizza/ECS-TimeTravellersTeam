@@ -28,10 +28,7 @@ struct ContentView: View {
                                 .padding()
                                 .opacity(0.6)
                                 
-                                     //   .stroke(blink ? Color.white : Color.clear, lineWidth: 5)
-                                    //    .animation(Animation.easeOut(duration: 2).repeatForever(autoreverses: true))
-                                
-                               
+                        
                           
                                 Image(systemName: "photo.on.rectangle.angled")
                                 .foregroundColor(blink ? Color.gray : Color.white)
@@ -58,6 +55,7 @@ struct ContentView: View {
                         if let image = photoVM.image {
                             Image(uiImage: image)
                                 .resizable()
+                                .scaledToFit()
                                 .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
                            
                                 .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
