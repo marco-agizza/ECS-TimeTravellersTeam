@@ -13,53 +13,63 @@ struct ContentView: View {
     @EnvironmentObject var weatherConditionVM: WeatherConditionViewModel
     @StateObject var locationDataManager = LocationDataManager()
     @State var weatherConditions : String = "default"
-    
+    @State private var blink = false
+
     var body: some View {
         NavigationView {
             VStack {
                 ZStack{
+                    
                     GeometryReader { geometry in
-                        ZStack{
-                            
-                            Rectangle()
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
                                 .fill(Color.gray)
                                 .frame(width: geometry.size.width * 0.91, height: geometry.size.height * 1.5, alignment: .center)
-                                .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
                                 .padding()
-                              
                                 .opacity(0.6)
                                 
-                            
-                      
-                            
-                            Image(systemName: "photo.on.rectangle.angled")
-                                .foregroundColor(.black)
-                                .padding()
-                                .font(.system(size: 130))
+                                     //   .stroke(blink ? Color.white : Color.clear, lineWidth: 5)
+                                    //    .animation(Animation.easeOut(duration: 2).repeatForever(autoreverses: true))
                                 
                                
-
+                          
+                                Image(systemName: "photo.on.rectangle.angled")
+                                .foregroundColor(blink ? Color.gray : Color.white)
+                                    .padding()
+                                    .font(.system(size: 130))
+                                    .opacity(blink ? 0.2 : 0.8)
+                                    .onAppear {
+                                            self.blink.toggle()
+                                        }
+                                    .animation(Animation.easeOut(duration: 2).repeatForever(autoreverses: true))
+                                  
+                            
                         }
+                        
                         .onTapGesture {
-                            photoVM.photoSource = .camera
-                            photoVM.showPhotoPicker()
+                            withAnimation(.none) {
+                                photoVM.photoSource = .camera
+                                photoVM.showPhotoPicker()
+                            }
                             print("Tapped")
                         }
+                    
                         
                         if let image = photoVM.image {
                             Image(uiImage: image)
                                 .resizable()
                                 .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
-                                .aspectRatio(contentMode: .fit)
-                                .scaledToFit()
+                           
                                 .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                             
                                 .padding()
                         }
                        
-                        
+                         
                     }
                     
                 }
+               
                 .navigationTitle("Good morning")
                 .navigationBarItems(
                     trailing:
