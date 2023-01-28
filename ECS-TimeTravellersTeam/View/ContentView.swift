@@ -144,6 +144,7 @@ struct ContentView: View {
                     }
                 }
             }
+            
         }
     .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: $photoVM.photoPickerShowen) {
