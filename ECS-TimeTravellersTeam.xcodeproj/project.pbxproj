@@ -371,7 +371,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ECS-TimeTravellersTeam/Preview Content\"";
-				DEVELOPMENT_TEAM = Y46CYM88ZX;
+				DEVELOPMENT_TEAM = F639597UZK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Library use";
@@ -389,7 +389,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "antonio.com.academy.ECS-TimeTravellersTeam";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.academy.ECS-TimeTravellersTeam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -405,7 +405,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ECS-TimeTravellersTeam/Preview Content\"";
-				DEVELOPMENT_TEAM = Y46CYM88ZX;
+				DEVELOPMENT_TEAM = F639597UZK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Library use";
@@ -423,7 +423,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "antonio.com.academy.ECS-TimeTravellersTeam";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.academy.ECS-TimeTravellersTeam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

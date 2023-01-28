@@ -189,6 +189,7 @@ struct ContentView: View {
             withAnimation {
                 let moment = Moment(context: viewContext)
                 let pngImageData = image.pngData()
+                moment.picture = pngImageData // not present in the tutorial
                 imageToStore.setValue(pngImageData, forKey: "picture")
                 
                 saveContext()

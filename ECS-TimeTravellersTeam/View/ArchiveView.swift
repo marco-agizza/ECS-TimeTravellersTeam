@@ -20,25 +20,21 @@ struct ArchiveView: View {
     
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(moments) { moment in
-                    Text(moment.desc!)
-                    let image = UIImage(data: moment.picture!)
-                    Image(uiImage: image!)
-                    let imageData = fetchData()
-                    Image(uiImage: convertDataToImage(imageData: imageData))
-                }.onDelete(perform: deleteProducts)
-                
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                
-            }
-            Text("Select an item")
+        List {
+            ForEach(moments) { moment in
+                Text("lala")
+                var imageData = moment.value(forKey: "picture") as! Data
+                Image(uiImage: UIImage(data: imageData).unsafelyUnwrapped)
+            }.onDelete(perform: deleteProducts)
+            
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
+            }
+            
+        }
+        Text("Select an item")
     }
     
     private func deleteProducts(offsets: IndexSet) {
@@ -72,7 +68,7 @@ struct ArchiveView: View {
     }
     
     private func convertDataToImage(imageData: Data) -> UIImage {
-            return UIImage(data:imageData)!
+        return UIImage(data:imageData)!
         
     }
     
