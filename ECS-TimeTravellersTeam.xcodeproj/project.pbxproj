@@ -371,7 +371,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ECS-TimeTravellersTeam/Preview Content\"";
-				DEVELOPMENT_TEAM = F639597UZK;
+				DEVELOPMENT_TEAM = FC4N8Y3U83;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Library use";
@@ -405,7 +405,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ECS-TimeTravellersTeam/Preview Content\"";
-				DEVELOPMENT_TEAM = F639597UZK;
+				DEVELOPMENT_TEAM = FC4N8Y3U83;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Library use";

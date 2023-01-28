@@ -13,51 +13,61 @@ struct ContentView: View {
     @EnvironmentObject var weatherConditionVM: WeatherConditionViewModel
     @StateObject var locationDataManager = LocationDataManager()
     @State var weatherConditions : String = "default"
-    
+    @State private var blink = false
+
     var body: some View {
         NavigationView {
             VStack {
                 ZStack{
+                    
                     GeometryReader { geometry in
-                        ZStack{
-                            
-                            Rectangle()
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
                                 .fill(Color.gray)
-                                .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
-                                .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                                .frame(width: geometry.size.width * 0.91, height: geometry.size.height * 1.5, alignment: .center)
                                 .padding()
-                                .onTapGesture {
-                                    photoVM.photoSource = .camera
-                                    photoVM.showPhotoPicker()
-                                    print("Tapped")
-                                }
                                 .opacity(0.6)
                                 
+                        
+                          
+                                Image(systemName: "photo.on.rectangle.angled")
+                                .foregroundColor(blink ? Color.gray : Color.white)
+                                    .padding()
+                                    .font(.system(size: 130))
+                                    .opacity(blink ? 0.2 : 0.6)
+                                    .onAppear {
+                                            self.blink.toggle()
+                                        }
+                                    .animation(Animation.easeOut(duration: 2.5).repeatForever(autoreverses: true))
+                                  
                             
-                      
-                            
-                            Image(systemName: "photo.on.rectangle.angled")
-                                .foregroundColor(.black)
-                                .padding()
-                                .font(.system(size: 130))
-                                
-
                         }
+                        
+                        .onTapGesture {
+                            withAnimation(.none) {
+                                photoVM.photoSource = .camera
+                                photoVM.showPhotoPicker()
+                            }
+                            print("Tapped")
+                        }
+                    
                         
                         if let image = photoVM.image {
                             Image(uiImage: image)
                                 .resizable()
-                                .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
-                                .aspectRatio(contentMode: .fill)
                                 .scaledToFit()
+                                .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
+                           
                                 .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                             
                                 .padding()
                         }
                        
-                        
+                         
                     }
                     
                 }
+               
                 .navigationTitle("Good morning")
                 .navigationBarItems(
                     trailing:
@@ -136,7 +146,7 @@ struct ContentView: View {
             }
             
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+    .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: $photoVM.photoPickerShowen) {
             ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
         }
@@ -145,8 +155,6 @@ struct ContentView: View {
                 weatherConditionVM.anErrorOccurred = false
             }
         }
-        
-
         .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
     }
     
