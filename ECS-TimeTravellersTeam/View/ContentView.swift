@@ -20,28 +20,8 @@ struct ContentView: View {
             VStack {
                 ZStack{
                     
-                    GeometryReader { geometry in
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.gray)
-                                .frame(width: geometry.size.width * 0.91, height: geometry.size.height * 1.5, alignment: .center)
-                                .padding()
-                                .opacity(0.6)
-                                
-                        
-                          
-                                Image(systemName: "photo.on.rectangle.angled")
-                                .foregroundColor(blink ? Color.gray : Color.white)
-                                    .padding()
-                                    .font(.system(size: 130))
-                                    .opacity(blink ? 0.2 : 0.6)
-                                    .onAppear {
-                                            self.blink.toggle()
-                                        }
-                                    .animation(Animation.easeOut(duration: 2.5).repeatForever(autoreverses: true))
-                                  
-                            
-                        }
+                    GeometryReader { geometry in                
+                        PhotoRectangle()
                         
                         .onTapGesture {
                             withAnimation(.none) {
@@ -94,6 +74,7 @@ struct ContentView: View {
                 }
                 
                StoryDayView()
+                
               
                     GeometryReader { geometry in
                         VStack {
