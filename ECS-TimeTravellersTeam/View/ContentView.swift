@@ -20,7 +20,8 @@ struct ContentView: View {
             VStack {
                 ZStack{
                     
-                    GeometryReader { geometry in                
+                    GeometryReader { geometry in
+                    //questo GeometryReader serve al frame dell'Image
                         PhotoRectangle()
                         
                         .onTapGesture {
@@ -42,12 +43,8 @@ struct ContentView: View {
                              
                                 .padding()
                         }
-                       
-                         
                     }
-                    
                 }
-               
                 .navigationTitle("Good morning")
                 .navigationBarItems(
                     trailing:
@@ -75,7 +72,7 @@ struct ContentView: View {
                 
                StoryDayView()
                 
-              
+
                     GeometryReader { geometry in
                         VStack {
                             Spacer()

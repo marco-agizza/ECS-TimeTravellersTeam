@@ -11,15 +11,13 @@ struct PhotoRectangle: View {
     @State private var blink = false
     var body: some View {
         ZStack{
-            
             GeometryReader { geometry in
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.gray)
                         .frame(width: geometry.size.width * 0.91, height: geometry.size.height * 1.5, alignment: .center)
                         .padding()
-                        .opacity(0.6)
-           
+                        .opacity(0.6)           
                     Image(systemName: "photo.on.rectangle.angled")
                         .foregroundColor(blink ? Color.gray : Color.white)
                         .padding()
@@ -30,6 +28,7 @@ struct PhotoRectangle: View {
                         }
                         .animation(Animation.easeOut(duration: 2.5).repeatForever(autoreverses: true))
                 }
+                
             }
         }        
     }

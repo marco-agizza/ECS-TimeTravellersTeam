@@ -33,9 +33,9 @@ struct StoryDayView: View {
                             .font(.title)
                             .padding()
                     )
-                    .onTapGesture {
-                        print("story of the day")
-                    }
+//                    .onTapGesture {
+//                        print("story of the day")
+//                    }
             }
         }
     }
