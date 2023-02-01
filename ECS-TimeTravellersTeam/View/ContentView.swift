@@ -93,7 +93,8 @@ struct ContentView: View {
                     Text("State: "+String(weatherCondition.text ?? "None"))
                 }
                 
-               
+               StoryDayView()
+              
                     GeometryReader { geometry in
                         VStack {
                             Spacer()
@@ -137,7 +138,7 @@ struct ContentView: View {
                                     print("Finding your location...")
                                     //ProgressView()
                                 default:
-                                    print("cazzo")
+                                    print("ops...")
                                     //ProgressView()
                                 }
                             }
