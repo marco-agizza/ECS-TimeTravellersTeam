@@ -10,7 +10,8 @@ import SwiftUI
 struct StoryDayView: View {
     //questo serve per salvare il testo inserito nel TextField
     @State var textStoryDay: String = ""
-    
+    @State var image : UIImage
+    @State var temperature : String
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -45,6 +46,9 @@ struct StoryDayView: View {
         withAnimation {
             let moment = Moment(context: viewContext)
             moment.desc = textStoryDay
+            let pngImageData  = (image).pngData()
+            moment.picture = pngImageData
+            moment.temperature = temperature
             saveContext()
         }
     }
@@ -61,8 +65,3 @@ struct StoryDayView: View {
     
 }
 
-struct StoryDayView_Previews: PreviewProvider {
-    static var previews: some View {
-        StoryDayView()
-    }
-}

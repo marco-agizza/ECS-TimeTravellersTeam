@@ -22,9 +22,16 @@ struct ArchiveView: View {
     var body: some View {
         List {
             ForEach(moments) { moment in
-                Text("lala")
-                var imageData = moment.value(forKey: "picture") as! Data
-                Image(uiImage: UIImage(data: imageData).unsafelyUnwrapped)
+                Text(moment.desc ?? "LALALA")
+                Text(moment.temperature ?? "NOT PRESENT")
+                let imageData = moment.value(forKey: "picture") as! Data
+                Image(uiImage: UIImage(data: imageData).unsafelyUnwrapped).resizable()
+                    .frame(alignment: .center)
+                    .aspectRatio(contentMode: .fill)
+                    .scaledToFit()
+                    .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                    .padding()
+                    .rotationEffect(.degrees(90))
             }.onDelete(perform: deleteProducts)
             
         }
@@ -34,7 +41,6 @@ struct ArchiveView: View {
             }
             
         }
-        Text("Select an item")
     }
     
     private func deleteProducts(offsets: IndexSet) {
