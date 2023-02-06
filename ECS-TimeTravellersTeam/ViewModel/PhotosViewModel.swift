@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class PhotosViewModel: ObservableObject {
-    @Published var image: UIImage?
+    @Published var image: UIImage? 
     @Published var photoPickerShowen = false
     @Published var photoSource: PhotoPicker.PhotoSource = .library
     

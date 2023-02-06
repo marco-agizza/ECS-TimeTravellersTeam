@@ -18,10 +18,12 @@
 		524E92592970121A001BCBD3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E92582970121A001BCBD3 /* Persistence.swift */; };
 		524E925C2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 524E925A2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld */; };
 		524E926429701265001BCBD3 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926329701265001BCBD3 /* PhotosViewModel.swift */; };
-		524E92672970126E001BCBD3 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E92662970126E001BCBD3 /* Picker.swift */; };
+		524E92672970126E001BCBD3 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E92662970126E001BCBD3 /* PhotoPicker.swift */; };
 		524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926E297012C0001BCBD3 /* ImagePicker.swift */; };
 		524E9271297012C0001BCBD3 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */; };
 		524E9274297012C9001BCBD3 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E9273297012C9001BCBD3 /* FileManager+Extension.swift */; };
+		52624F0A29902A560011854B /* PictureOfTheDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52624F0929902A560011854B /* PictureOfTheDayView.swift */; };
+		52624F0C299031EC0011854B /* PictureDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52624F0B299031EC0011854B /* PictureDescriptionView.swift */; };
 		528252AD297D9B9B00BE6BAC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528252AC297D9B9B00BE6BAC /* NetworkError.swift */; };
 		6E4CD127297E9A5B0076910D /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4CD126297E9A5B0076910D /* ArchiveView.swift */; };
 		DB26829E297EA7D9002FCA7B /* DayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB26829D297EA7D9002FCA7B /* DayRow.swift */; };
@@ -40,10 +42,12 @@
 		524E92582970121A001BCBD3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		524E925B2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ECS_TimeTravellersTeam.xcdatamodel; sourceTree = "<group>"; };
 		524E926329701265001BCBD3 /* PhotosViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
-		524E92662970126E001BCBD3 /* Picker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
+		524E92662970126E001BCBD3 /* PhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		524E926E297012C0001BCBD3 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		524E926F297012C0001BCBD3 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		524E9273297012C9001BCBD3 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		52624F0929902A560011854B /* PictureOfTheDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureOfTheDayView.swift; sourceTree = "<group>"; };
+		52624F0B299031EC0011854B /* PictureDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureDescriptionView.swift; sourceTree = "<group>"; };
 		528252AC297D9B9B00BE6BAC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		6E4CD126297E9A5B0076910D /* ArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
 		DB26829D297EA7D9002FCA7B /* DayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRow.swift; sourceTree = "<group>"; };
@@ -85,7 +89,6 @@
 				524E92652970126E001BCBD3 /* Model */,
 				524E926829701279001BCBD3 /* View */,
 				524E92532970121A001BCBD3 /* Assets.xcassets */,
-				524E92582970121A001BCBD3 /* Persistence.swift */,
 				524E925A2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld */,
 				524E926D297012C0001BCBD3 /* UIViewRepresentables */,
 				524E9272297012C9001BCBD3 /* Extensions */,
@@ -115,8 +118,9 @@
 		524E92652970126E001BCBD3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				524E92582970121A001BCBD3 /* Persistence.swift */,
 				4B6CD1AA29780F1D0040793F /* WeatherCondition.swift */,
-				524E92662970126E001BCBD3 /* Picker.swift */,
+				524E92662970126E001BCBD3 /* PhotoPicker.swift */,
 				522480DF2977EC6B00C12F6A /* LocationDataManager.swift */,
 			);
 			path = Model;
@@ -126,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				524E925129701219001BCBD3 /* ContentView.swift */,
+				52624F0929902A560011854B /* PictureOfTheDayView.swift */,
+				52624F0B299031EC0011854B /* PictureDescriptionView.swift */,
 				6E4CD126297E9A5B0076910D /* ArchiveView.swift */,
 				DB26829D297EA7D9002FCA7B /* DayRow.swift */,
 			);
@@ -236,11 +242,13 @@
 				524E92592970121A001BCBD3 /* Persistence.swift in Sources */,
 				6E4CD127297E9A5B0076910D /* ArchiveView.swift in Sources */,
 				524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */,
-				524E92672970126E001BCBD3 /* Picker.swift in Sources */,
+				524E92672970126E001BCBD3 /* PhotoPicker.swift in Sources */,
 				524E925229701219001BCBD3 /* ContentView.swift in Sources */,
 				524E926429701265001BCBD3 /* PhotosViewModel.swift in Sources */,
 				528252AD297D9B9B00BE6BAC /* NetworkError.swift in Sources */,
 				DB26829E297EA7D9002FCA7B /* DayRow.swift in Sources */,
+				52624F0C299031EC0011854B /* PictureDescriptionView.swift in Sources */,
+				52624F0A29902A560011854B /* PictureOfTheDayView.swift in Sources */,
 				524E925029701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift in Sources */,
 				524E925C2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld in Sources */,
 			);
@@ -371,7 +379,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ECS-TimeTravellersTeam/Preview Content\"";
-				DEVELOPMENT_TEAM = FC4N8Y3U83;
+				DEVELOPMENT_TEAM = F639597UZK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Library use";
@@ -405,7 +413,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ECS-TimeTravellersTeam/Preview Content\"";
-				DEVELOPMENT_TEAM = FC4N8Y3U83;
+				DEVELOPMENT_TEAM = F639597UZK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Library use";
