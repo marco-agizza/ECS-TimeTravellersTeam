@@ -33,8 +33,11 @@ struct ContentView: View {
                                 .foregroundColor(Color.white)
                                 .font(.title)
                         }
-                    
                 )
+                .transaction { transaction in
+                    transaction.animation = nil
+                    
+                }
                 Spacer()
                 PictureDescriptionButton()
                     .onTapGesture {

@@ -39,6 +39,7 @@ struct PictureDescriptionView: View {
         withAnimation {
             let moment = Moment(context: viewContext)
             moment.desc = textStoryDay
+            moment.date = takeMyFormatter().string(from: Date.now)
             let pngImageData  = (image).pngData()
             moment.picture = pngImageData
             moment.temperature = temperature
