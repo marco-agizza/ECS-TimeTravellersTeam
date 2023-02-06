@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-struct StoryDayView: View {
+struct PictureDescriptionView: View {
     //questo serve per salvare il testo inserito nel TextField
     @State var textStoryDay: String = ""
     @State var image : UIImage
     @State var temperature : String
     
     @Environment(\.managedObjectContext) private var viewContext
-    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Moment.date, ascending: true)],
         animation: .default)
@@ -32,17 +31,11 @@ struct StoryDayView: View {
                 additem()
             }.buttonStyle(.borderedProminent)
             Spacer()
-            
-            
-            
         }
         .padding()
-        
-        
     }
     
     private func additem() {
-        
         withAnimation {
             let moment = Moment(context: viewContext)
             moment.desc = textStoryDay
@@ -61,7 +54,6 @@ struct StoryDayView: View {
             fatalError("An error occured: \(error)")
         }
     }
-    
     
 }
 

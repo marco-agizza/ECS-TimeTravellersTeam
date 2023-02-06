@@ -11,66 +11,20 @@ import CoreData
 struct ContentView: View {
     @EnvironmentObject var photoVM: PhotosViewModel
     @EnvironmentObject var weatherConditionVM: WeatherConditionViewModel
-    @StateObject var locationDataManager = LocationDataManager()
+    
     @State var weatherConditions : String = "default"
     @State var isStoryPresented : Bool = false
-    
-    @Environment(\.managedObjectContext) private var viewContext
-    
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Moment.date, ascending: true)],
-        animation: .default)
-    private var moments: FetchedResults<Moment>
     @State private var blink = false
+    @State private var unexistingPictureOfTheDay: Bool = false
+    
     var body: some View {
         NavigationView {
             VStack {
                 ZStack{
-                    
-                    GeometryReader { geometry in
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.gray)
-                                .frame(width: geometry.size.width * 0.91, height: geometry.size.height * 1.5, alignment: .center)
-                                .padding()
-                                .opacity(0.6)
-                                
-                                Image(systemName: "photo.on.rectangle.angled")
-                                .foregroundColor(blink ? Color.gray : Color.white)
-                                    .padding()
-                                    .font(.system(size: 130))
-                                    .opacity(blink ? 0.2 : 0.6)
-                                    .onAppear {
-                                            self.blink.toggle()
-                                        }
-                                    .animation(Animation.easeOut(duration: 2.5).repeatForever(autoreverses: true))
-                        }
-                        
-                        .onTapGesture {
-                            withAnimation(.none) {
-                                photoVM.photoSource = .camera
-                                photoVM.showPhotoPicker()
-                            }
-                            print("Tapped")
-                        }
-                    
-                        
-                        if let image = photoVM.image {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
-                           
-                                .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
-                             
-                                .padding()
-                                //.onAppear(perform: addImage)
-                                .onAppear(perform: apiRequest)
-                        }
-                    }
-                    
+                    PictureOfTheDayView()
+                        .environmentObject(photoVM)
+                        .environmentObject(weatherConditionVM)
                 }
-               
                 .navigationTitle("Good morning")
                 .navigationBarItems(
                     trailing:
@@ -81,125 +35,46 @@ struct ContentView: View {
                         }
                     
                 )
-                
                 Spacer()
-                if let weatherCondition = weatherConditionVM.weatherCondition {
-                    Text("Temperature: "+String(weatherCondition.temperature ?? 0))
-                    Text("State: "+String(weatherCondition.text ?? "None"))
-                }
-                
-                
-                GeometryReader { geometry in
-                    VStack {
-                        Spacer()
-                        Rectangle()
-                            .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 0.25)
-                            .foregroundColor(.white)
-                            .cornerRadius(12.0)
-                            .padding()
-                            .overlay(
-                                HStack{
-                                    Image(systemName: "note.text.badge.plus")
-                                        .padding(.leading, 18)
-                                        .padding(.trailing, 18)
-                                    VStack{
-                                        Text("Story of the day")
-                                            .font(.bold(.title3)())
-                                        Text("Description...").font(.subheadline)
-                                            .padding(.trailing, 49)
-                                    }
-                                    Spacer()
-                                }
-                                    .foregroundColor(.black)
-                                    .font(.title)
-                                    .padding()
-                            )
-                            .onTapGesture {
-                                isStoryPresented = true
-                                
-                            }
-                        
+                PictureDescriptionButton()
+                    .onTapGesture {
+                        if photoVM.image != nil {
+                            isStoryPresented.toggle()
+                        } else {
+                            unexistingPictureOfTheDay.toggle()
+                        }
                     }
-                }
             }
             
         }
         .sheet(isPresented: $photoVM.photoPickerShowen) {
             ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
         }
-        
         .sheet(isPresented: $isStoryPresented){
-            StoryDayView(image: photoVM.image!, temperature: String(weatherConditionVM.weatherCondition?.temperature ?? 0)).ignoresSafeArea()
+            if let currentMomentImage = photoVM.image {
+                PictureDescriptionView(image: currentMomentImage, temperature: String(weatherConditionVM.weatherCondition?.temperature ?? 0)).ignoresSafeArea()
+            }
         }
         .alert("Connection error. Status code: \(weatherConditionVM.statusCode)", isPresented: $weatherConditionVM.anErrorOccurred){
             Button("OK", role: .cancel){
                 weatherConditionVM.anErrorOccurred = false
             }
-        } 
+        }
+        .alert("You should take a picture before this.", isPresented: $unexistingPictureOfTheDay){
+            Button("OK", role: .cancel){
+                unexistingPictureOfTheDay.toggle()
+            }
+        }
         .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
     }
     
-    
-    private func addImage(){
-        let pngImageData  = (photoVM.image!).pngData()
-        let moment = Moment(context: viewContext)
-        moment.picture = pngImageData
-        saveContext()
-    }
-    
-    private func apiRequest(){
-        switch locationDataManager.locationManager.authorizationStatus {
-        case .authorizedWhenInUse:  // Location services are available.
-            // Insert code here of what should happen when Location services are authorized
-            if let currentLatitude = locationDataManager.locationManager.location?.coordinate.latitude, let currentLongitude = locationDataManager.locationManager.location?.coordinate.longitude {
-                Task {
-                    try await weatherConditionVM.getWeatherConditions(path: "/weather", latitude: currentLatitude.truncate(places: 1), longitude: currentLongitude.truncate(places: 1))
-                }
-            }
-        case .restricted, .denied:  // Location services currently unavailable.
-            // Insert code here of what should happen when Location services are NOT authorized
-            print("Current location data was restricted or denied.")
-        case .notDetermined:        // Authorization not determined yet.
-            print("Finding your location...")
-            //ProgressView()
-        default:
-            print("cazzo")
-            //ProgressView()
-        }
-    }
-    
-    
     /*
-     private func additem() {
-     if let image = photoVM.image
-     {
-     let entityName = NSEntityDescription.entity(forEntityName: "Moment", in: viewContext)!
-     let imageToStore = NSManagedObject(entity: entityName, insertInto: viewContext)
-     withAnimation {
+     private func addImage(){
+     let pngImageData  = (photoVM.image!).pngData()
      let moment = Moment(context: viewContext)
-     let pngImageData = image.pngData()
-     moment.picture = pngImageData // not present in the tutorial
-     imageToStore.setValue(pngImageData, forKey: "picture")
-     
+     moment.picture = pngImageData
      saveContext()
-     }
-     
-     }
-     
-     
-     
-     
-     }
-     */
-    
-    private func saveContext() {
-        do {
-            try viewContext.save()
-        } catch {
-            let error = error as NSError
-            fatalError("An error occured: \(error)")
-        }
-    }
+     }*/
 }
 
 

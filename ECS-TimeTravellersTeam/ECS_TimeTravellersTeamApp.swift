@@ -9,15 +9,16 @@ import SwiftUI
 
 @main
 struct ECS_TimeTravellersApp: App {
-    let persistenceController = PersistenceController.shared
+    let persistenceManager = PersistenceManager.shared
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, persistenceManager.container.viewContext)
                 .environmentObject(PhotosViewModel())
                 .environmentObject(WeatherConditionViewModel())
                 .onAppear {
+                    print("ciaone")
                     UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
                 }
         }
