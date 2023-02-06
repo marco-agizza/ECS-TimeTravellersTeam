@@ -29,7 +29,6 @@ struct PictureOfTheDayView: View {
                     .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 1.5, alignment: .center)
                     .cornerRadius(12)
                     .padding()
-                    .onAppear(perform: apiRequest)
             } else {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
@@ -53,6 +52,7 @@ struct PictureOfTheDayView: View {
                     withAnimation(.none) {
                         photoVM.photoSource = .camera
                         if photoVM.image == nil {
+                            apiRequest()
                             photoVM.showPhotoPicker()
                         }
                     }

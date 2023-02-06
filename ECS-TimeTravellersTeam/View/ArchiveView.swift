@@ -22,8 +22,10 @@ struct ArchiveView: View {
     var body: some View {
         List {
             ForEach(moments) { moment in
-                Text(moment.desc ?? "LALALA")
-                Text(moment.temperature ?? "NOT PRESENT")
+                Text(moment.desc ?? "No description provided")
+                Text(moment.date ?? "No date provided")
+                Text(moment.temperature ?? "No temperature provided")
+                Text(moment.weatherConditionDesc ?? "No weather condition description provided")
                 let imageData = moment.value(forKey: "picture") as! Data
                 Image(uiImage: UIImage(data: imageData).unsafelyUnwrapped).resizable()
                     .frame(alignment: .center)

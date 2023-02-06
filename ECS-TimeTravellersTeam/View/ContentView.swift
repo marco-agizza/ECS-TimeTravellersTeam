@@ -17,6 +17,9 @@ struct ContentView: View {
     @State private var blink = false
     @State private var unexistingPictureOfTheDay: Bool = false
     
+    let currentHour = (Calendar.current.component(.hour, from: Date()))
+    let unavailableWeatherConditionTemperatureCode = 1000
+    let unavailableWeatherConditionText = "No description provided"
     var body: some View {
         NavigationView {
             VStack {
@@ -25,19 +28,22 @@ struct ContentView: View {
                         .environmentObject(photoVM)
                         .environmentObject(weatherConditionVM)
                 }
-                .navigationTitle("Good morning")
+                .navigationTitle(currentHour < 12 ? "Good morning" : "Good afternoon")
                 .navigationBarItems(
                     trailing:
                         NavigationLink(destination: ArchiveView()) {
                             Image(systemName: "calendar.circle")
                                 .foregroundColor(Color.white)
                                 .font(.title)
+                                .transaction { transaction in
+                                    transaction.animation = nil
+                                }
                         }
                 )
-                .transaction { transaction in
+                /*.transaction { transaction in
                     transaction.animation = nil
                     
-                }
+                }*/
                 Spacer()
                 PictureDescriptionButton()
                     .onTapGesture {
@@ -55,7 +61,12 @@ struct ContentView: View {
         }
         .sheet(isPresented: $isStoryPresented){
             if let currentMomentImage = photoVM.image {
-                PictureDescriptionView(image: currentMomentImage, temperature: String(weatherConditionVM.weatherCondition?.temperature ?? 0)).ignoresSafeArea()
+                PictureDescriptionView(
+                    image: currentMomentImage,
+                    weatherConditionTemperature: String(weatherConditionVM.weatherCondition?.temperature ?? unavailableWeatherConditionTemperatureCode),
+                    weatherConditionDescription: String(weatherConditionVM.weatherCondition?.text ?? unavailableWeatherConditionText)
+                )
+                .ignoresSafeArea()
             }
         }
         .alert("Connection error. Status code: \(weatherConditionVM.statusCode)", isPresented: $weatherConditionVM.anErrorOccurred){
