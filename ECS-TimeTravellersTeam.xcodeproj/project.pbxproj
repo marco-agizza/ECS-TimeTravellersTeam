@@ -10,6 +10,7 @@
 		4B49FC28298130C30084F390 /* PictureDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49FC27298130C30084F390 /* PictureDescriptionView.swift */; };
 		4B6CD1A929780EA60040793F /* WeatherConditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CD1A829780EA60040793F /* WeatherConditionViewModel.swift */; };
 		4B6CD1AB29780F1D0040793F /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CD1AA29780F1D0040793F /* WeatherCondition.swift */; };
+		5214E7E529918DD900730939 /* MomentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5214E7E429918DD900730939 /* MomentView.swift */; };
 		522480E02977EC6B00C12F6A /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522480DF2977EC6B00C12F6A /* LocationDataManager.swift */; };
 		5232709C297E8D6700B387F5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232709B297E8D6700B387F5 /* Utils.swift */; };
 		524E925029701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524E924F29701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift */; };
@@ -34,6 +35,7 @@
 		4B49FC27298130C30084F390 /* PictureDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureDescriptionView.swift; sourceTree = "<group>"; };
 		4B6CD1A829780EA60040793F /* WeatherConditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditionViewModel.swift; sourceTree = "<group>"; };
 		4B6CD1AA29780F1D0040793F /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
+		5214E7E429918DD900730939 /* MomentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentView.swift; sourceTree = "<group>"; };
 		522480DF2977EC6B00C12F6A /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		5232709B297E8D6700B387F5 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		524E924C29701219001BCBD3 /* ECS-TimeTravellersTeam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECS-TimeTravellersTeam.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +139,7 @@
 				4B49FC27298130C30084F390 /* PictureDescriptionView.swift */,
 				6E4CD126297E9A5B0076910D /* ArchiveView.swift */,
 				DB26829D297EA7D9002FCA7B /* DayRow.swift */,
+				5214E7E429918DD900730939 /* MomentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				52624F102990F9730011854B /* PictureOfTheDayView.swift in Sources */,
 				DB26829E297EA7D9002FCA7B /* DayRow.swift in Sources */,
 				524E925029701219001BCBD3 /* ECS_TimeTravellersTeamApp.swift in Sources */,
+				5214E7E529918DD900730939 /* MomentView.swift in Sources */,
 				524E925C2970121A001BCBD3 /* ECS_TimeTravellersTeam.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
