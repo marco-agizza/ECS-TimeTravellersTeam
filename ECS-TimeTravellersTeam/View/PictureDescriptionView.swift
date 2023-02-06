@@ -10,8 +10,9 @@ import SwiftUI
 struct PictureDescriptionView: View {
     //questo serve per salvare il testo inserito nel TextField
     @State var textStoryDay: String = ""
-    @State var image : UIImage
-    @State var temperature : String
+    @State var image: UIImage
+    @State var weatherConditionTemperature: String?
+    @State var weatherConditionDescription: String?
     
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
@@ -21,7 +22,6 @@ struct PictureDescriptionView: View {
     
     var body: some View {
         VStack{
-            
             Text("Story of the day")
                 .font(.largeTitle)
             Text(Date.now.formatted(date: .long, time: .shortened))
@@ -38,11 +38,19 @@ struct PictureDescriptionView: View {
     private func additem() {
         withAnimation {
             let moment = Moment(context: viewContext)
-            moment.desc = textStoryDay
-            moment.date = takeMyFormatter().string(from: Date.now)
             let pngImageData  = (image).pngData()
+            
             moment.picture = pngImageData
-            moment.temperature = temperature
+            if !textStoryDay.isEmpty {
+                moment.desc = textStoryDay
+            }
+            if weatherConditionTemperature != "1000" {
+                moment.temperature = weatherConditionTemperature
+            }
+            if weatherConditionDescription != "No description provided" {
+                moment.weatherConditionDesc = weatherConditionDescription
+            }
+            moment.date = takeMyFormatter().string(from: Date.now)
             saveContext()
         }
     }
