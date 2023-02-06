@@ -16,24 +16,21 @@ struct ArchiveView: View {
     @FetchRequest(entity: Moment.entity(), sortDescriptors: [])
     private var moments: FetchedResults<Moment>
     
-    
-    
-    
     var body: some View {
         List {
             ForEach(moments) { moment in
-                Text(moment.desc ?? "No description provided")
-                Text(moment.date ?? "No date provided")
-                Text(moment.temperature ?? "No temperature provided")
-                Text(moment.weatherConditionDesc ?? "No weather condition description provided")
-                let imageData = moment.value(forKey: "picture") as! Data
-                Image(uiImage: UIImage(data: imageData).unsafelyUnwrapped).resizable()
-                    .frame(alignment: .center)
-                    .aspectRatio(contentMode: .fill)
-                    .scaledToFit()
-                    .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
-                    .padding()
-                    .rotationEffect(.degrees(90))
+                if let momentDate = moment.date, let momentImage = moment.value(forKey: "picture") as? Data {
+                    var momentImage = UIImage(data: momentImage)
+                    if let momentImage = momentImage {
+                        MomentView(
+                            momentDescription: moment.desc,
+                            momentDate: momentDate,
+                            momentTemperature: moment.temperature,
+                            momentWeatherCondition: moment.weatherConditionDesc,
+                            momentPicture: momentImage.rotate(radians: .pi/2)!
+                        )
+                    }
+                }
             }.onDelete(perform: deleteProducts)
             
         }
