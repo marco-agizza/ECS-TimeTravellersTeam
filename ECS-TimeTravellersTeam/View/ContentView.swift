@@ -13,8 +13,15 @@ struct ContentView: View {
     @EnvironmentObject var weatherConditionVM: WeatherConditionViewModel
     @StateObject var locationDataManager = LocationDataManager()
     @State var weatherConditions : String = "default"
+    @State var isStoryPresented : Bool = false
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Moment.date, ascending: true)],
+        animation: .default)
+    private var moments: FetchedResults<Moment>
     @State private var blink = false
-
     var body: some View {
         NavigationView {
             VStack {
@@ -28,8 +35,6 @@ struct ContentView: View {
                                 .padding()
                                 .opacity(0.6)
                                 
-                        
-                          
                                 Image(systemName: "photo.on.rectangle.angled")
                                 .foregroundColor(blink ? Color.gray : Color.white)
                                     .padding()
@@ -39,8 +44,6 @@ struct ContentView: View {
                                             self.blink.toggle()
                                         }
                                     .animation(Animation.easeOut(duration: 2.5).repeatForever(autoreverses: true))
-                                  
-                            
                         }
                         
                         .onTapGesture {
@@ -61,9 +64,9 @@ struct ContentView: View {
                                 .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
                              
                                 .padding()
+                                //.onAppear(perform: addImage)
+                                .onAppear(perform: apiRequest)
                         }
-                       
-                         
                     }
                     
                 }
@@ -71,32 +74,24 @@ struct ContentView: View {
                 .navigationTitle("Good morning")
                 .navigationBarItems(
                     trailing:
-                        Button(
-                            action: {
-                                print("apapapp")
-                                if let image = photoVM.image {
-                                    if let assetId = image.imageAsset {
-                                        print(assetId)
-                                    }
-                                }
-                            },
-                            label: {
-                                Image(systemName: "calendar.circle")
-                                    .foregroundColor(Color.white)
-                                    .font(.title)
-                            }
-                        )
+                        NavigationLink(destination: ArchiveView()) {
+                            Image(systemName: "calendar.circle")
+                                .foregroundColor(Color.white)
+                                .font(.title)
+                        }
+                    
                 )
+                
                 Spacer()
                 if let weatherCondition = weatherConditionVM.weatherCondition {
                     Text("Temperature: "+String(weatherCondition.temperature ?? 0))
                     Text("State: "+String(weatherCondition.text ?? "None"))
                 }
                 
-               
-                    GeometryReader { geometry in
-                        VStack {
-                            Spacer()
+                
+                GeometryReader { geometry in
+                    VStack {
+                        Spacer()
                         Rectangle()
                             .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 0.25)
                             .foregroundColor(.white)
@@ -120,44 +115,91 @@ struct ContentView: View {
                                     .padding()
                             )
                             .onTapGesture {
-                                print("story of the day")
-                                switch locationDataManager.locationManager.authorizationStatus {
-                                case .authorizedWhenInUse:  // Location services are available.
-                                    // Insert code here of what should happen when Location services are authorized
-                                    if let currentLatitude = locationDataManager.locationManager.location?.coordinate.latitude, let currentLongitude = locationDataManager.locationManager.location?.coordinate.longitude {
-                                        Task {
-                                            try await weatherConditionVM.getWeatherConditions(path: "/weather", latitude: currentLatitude.truncate(places: 1), longitude: currentLongitude.truncate(places: 1))
-                                        }
-                                        //Text(String(weatherConditionVM.weatherCondition?.temperature ?? 0))
-                                    }
-                                case .restricted, .denied:  // Location services currently unavailable.
-                                    // Insert code here of what should happen when Location services are NOT authorized
-                                    print("Current location data was restricted or denied.")
-                                case .notDetermined:        // Authorization not determined yet.
-                                    print("Finding your location...")
-                                    //ProgressView()
-                                default:
-                                    print("cazzo")
-                                    //ProgressView()
-                                }
+                                isStoryPresented = true
+                                
                             }
+                        
                     }
                 }
             }
             
         }
-    .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: $photoVM.photoPickerShowen) {
             ImagePicker(sourceType: photoVM.photoSource == .library ? .photoLibrary : .camera, selectedImage: $photoVM.image)
+        }
+        
+        .sheet(isPresented: $isStoryPresented){
+            StoryDayView(image: photoVM.image!, temperature: String(weatherConditionVM.weatherCondition?.temperature ?? 0)).ignoresSafeArea()
         }
         .alert("Connection error. Status code: \(weatherConditionVM.statusCode)", isPresented: $weatherConditionVM.anErrorOccurred){
             Button("OK", role: .cancel){
                 weatherConditionVM.anErrorOccurred = false
             }
-        }
+        } 
         .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
     }
     
+    
+    private func addImage(){
+        let pngImageData  = (photoVM.image!).pngData()
+        let moment = Moment(context: viewContext)
+        moment.picture = pngImageData
+        saveContext()
+    }
+    
+    private func apiRequest(){
+        switch locationDataManager.locationManager.authorizationStatus {
+        case .authorizedWhenInUse:  // Location services are available.
+            // Insert code here of what should happen when Location services are authorized
+            if let currentLatitude = locationDataManager.locationManager.location?.coordinate.latitude, let currentLongitude = locationDataManager.locationManager.location?.coordinate.longitude {
+                Task {
+                    try await weatherConditionVM.getWeatherConditions(path: "/weather", latitude: currentLatitude.truncate(places: 1), longitude: currentLongitude.truncate(places: 1))
+                }
+            }
+        case .restricted, .denied:  // Location services currently unavailable.
+            // Insert code here of what should happen when Location services are NOT authorized
+            print("Current location data was restricted or denied.")
+        case .notDetermined:        // Authorization not determined yet.
+            print("Finding your location...")
+            //ProgressView()
+        default:
+            print("cazzo")
+            //ProgressView()
+        }
+    }
+    
+    
+    /*
+     private func additem() {
+     if let image = photoVM.image
+     {
+     let entityName = NSEntityDescription.entity(forEntityName: "Moment", in: viewContext)!
+     let imageToStore = NSManagedObject(entity: entityName, insertInto: viewContext)
+     withAnimation {
+     let moment = Moment(context: viewContext)
+     let pngImageData = image.pngData()
+     moment.picture = pngImageData // not present in the tutorial
+     imageToStore.setValue(pngImageData, forKey: "picture")
+     
+     saveContext()
+     }
+     
+     }
+     
+     
+     
+     
+     }
+     */
+    
+    private func saveContext() {
+        do {
+            try viewContext.save()
+        } catch {
+            let error = error as NSError
+            fatalError("An error occured: \(error)")
+        }
+    }
 }
 
 
@@ -165,7 +207,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .environmentObject(PhotosViewModel())
             .environmentObject(WeatherConditionViewModel())
     }

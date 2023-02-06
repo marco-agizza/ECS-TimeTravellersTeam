@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B49FC28298130C30084F390 /* StoryDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49FC27298130C30084F390 /* StoryDayView.swift */; };
 		4B6CD1A929780EA60040793F /* WeatherConditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CD1A829780EA60040793F /* WeatherConditionViewModel.swift */; };
 		4B6CD1AB29780F1D0040793F /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CD1AA29780F1D0040793F /* WeatherCondition.swift */; };
 		522480E02977EC6B00C12F6A /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522480DF2977EC6B00C12F6A /* LocationDataManager.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B49FC27298130C30084F390 /* StoryDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDayView.swift; sourceTree = "<group>"; };
 		4B6CD1A829780EA60040793F /* WeatherConditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditionViewModel.swift; sourceTree = "<group>"; };
 		4B6CD1AA29780F1D0040793F /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		522480DF2977EC6B00C12F6A /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				524E925129701219001BCBD3 /* ContentView.swift */,
+				4B49FC27298130C30084F390 /* StoryDayView.swift */,
 				6E4CD126297E9A5B0076910D /* ArchiveView.swift */,
 				DB26829D297EA7D9002FCA7B /* DayRow.swift */,
 			);
@@ -234,6 +237,7 @@
 				4B6CD1A929780EA60040793F /* WeatherConditionViewModel.swift in Sources */,
 				522480E02977EC6B00C12F6A /* LocationDataManager.swift in Sources */,
 				524E92592970121A001BCBD3 /* Persistence.swift in Sources */,
+				4B49FC28298130C30084F390 /* StoryDayView.swift in Sources */,
 				6E4CD127297E9A5B0076910D /* ArchiveView.swift in Sources */,
 				524E9270297012C0001BCBD3 /* ImagePicker.swift in Sources */,
 				524E92672970126E001BCBD3 /* Picker.swift in Sources */,
@@ -389,7 +393,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "antonio.com.academy.ECS-TimeTravellersTeam";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.academy.ECS-TimeTravellersTeam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -423,7 +427,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "antonio.com.academy.ECS-TimeTravellersTeam";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.academy.ECS-TimeTravellersTeam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

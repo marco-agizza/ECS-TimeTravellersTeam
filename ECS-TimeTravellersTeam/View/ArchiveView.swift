@@ -7,84 +7,83 @@
 
 import SwiftUI
 import CoreData
-/*
+
+
 struct ArchiveView: View {
+    
     @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+    
+    @FetchRequest(entity: Moment.entity(), sortDescriptors: [])
+    private var moments: FetchedResults<Moment>
+    
+    
+    
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        List {
+            ForEach(moments) { moment in
+                Text(moment.desc ?? "LALALA")
+                Text(moment.temperature ?? "NOT PRESENT")
+                let imageData = moment.value(forKey: "picture") as! Data
+                Image(uiImage: UIImage(data: imageData).unsafelyUnwrapped).resizable()
+                    .frame(alignment: .center)
+                    .aspectRatio(contentMode: .fill)
+                    .scaledToFit()
+                    .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
+                    .padding()
+                    .rotationEffect(.degrees(90))
+            }.onDelete(perform: deleteProducts)
+            
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
+            
         }
     }
-
-    private func addItem() {
+    
+    private func deleteProducts(offsets: IndexSet) {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            offsets.map { moments[$0] }.forEach(viewContext.delete)
+            saveContext()
         }
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+    
+    private func saveContext() {
+        do {
+            try viewContext.save()
+        } catch {
+            let error = error as NSError
+            fatalError("An error occured: \(error)")
         }
     }
+    
+    private func fetchData() -> Data {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Moment")
+        var pictureData = Data()
+        do {
+            let result = try viewContext.fetch(fetchRequest)
+            for data in result {
+                pictureData.append(data.value(forKey: "storedImage") as! Data)
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return pictureData
+    }
+    
+    private func convertDataToImage(imageData: Data) -> UIImage {
+        return UIImage(data:imageData)!
+        
+    }
+    
+    
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
         ArchiveView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        
     }
 }
-*/

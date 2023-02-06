@@ -101,7 +101,7 @@ class WeatherConditionViewModel: ObservableObject {
                 self.weatherCondition = decodedResponse.currentObservation.condition
             }
             if let weatherCondition = self.weatherCondition {
-                print("weather conditions are: \(weatherCondition.temperature!) e \(weatherCondition.text)")
+                print("weather conditions are: \(weatherCondition.temperature!) e \(String(describing: weatherCondition.text))")
             }
         } catch {
             print("hey")
