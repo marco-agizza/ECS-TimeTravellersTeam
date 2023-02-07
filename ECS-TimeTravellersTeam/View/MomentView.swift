@@ -18,20 +18,21 @@ struct MomentView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(Color.accentColor)
+                .foregroundColor(Color.indigo)
                 .frame(height: 210)
             
             HStack{
                 VStack (alignment: .leading){
+                    Spacer()
                     HStack{
                         Image(uiImage: momentPicture)
                             .resizable()
                             .frame(alignment: .center)
                             .aspectRatio(contentMode: .fill)
-                            .scaledToFit()
+                            .scaledToFill()
+                            .frame(width: /*@START_MENU_TOKEN@*/75.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/130.0/*@END_MENU_TOKEN@*/)
                             .cornerRadius(/*@START_MENU_TOKEN@*/12.0/*@END_MENU_TOKEN@*/)
-                            .padding()
-                            
+                            .cornerRadius(12)
                         Spacer()
                         if let momentDescription = momentDescription {
                             Text("Description: \(momentDescription)")
@@ -58,7 +59,7 @@ struct MomentView: View {
                     }
                 }
                 .padding(.leading, 25)
-                .padding(.vertical, 30)
+                .padding(.vertical, 15)
                 Spacer()
             }
             .frame(height: 210)

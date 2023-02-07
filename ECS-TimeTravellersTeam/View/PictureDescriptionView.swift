@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PictureDescriptionView: View {
+    @Environment(\.dismiss) var dismiss
     //questo serve per salvare il testo inserito nel TextField
     @State var textStoryDay: String = ""
     @State var image: UIImage
@@ -21,19 +22,48 @@ struct PictureDescriptionView: View {
     private var moments: FetchedResults<Moment>
     
     var body: some View {
-        VStack{
-            Text("Story of the day")
-                .font(.largeTitle)
-            Text(Date.now.formatted(date: .long, time: .shortened))
-            TextEditor(text: $textStoryDay)
-            
-            Button("Add Story") {
-                additem()
-            }.buttonStyle(.borderedProminent)
-            Spacer()
+        
+        GeometryReader { geometry in
+            VStack {
+                HStack {
+                    VStack(alignment: .leading){
+                        Text("Story of the day")
+                            .font(.largeTitle)
+                        Text(Date.now.formatted(date: .long, time: .shortened))
+                            .font(.caption)
+                        Text("Type a description if you want:")
+                            .padding(.top, 25)
+                    }
+                    Spacer()
+                }
+                
+                
+                    .padding()
+                TextEditor(text: $textStoryDay)
+                    .frame(width: geometry.size.width/1.1, height:geometry.size.height / 3)
+                    .overlay(RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.indigo, lineWidth: 2))
+                    .autocapitalization(.words)
+                    .disableAutocorrection(true)
+                    .padding()
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button("Add Story") {
+                        additem()
+                        dismiss()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .padding()
+                    Spacer()
+                }
+                Spacer()
+            }
         }
-        .padding()
     }
+    
+    
+    
     
     private func additem() {
         withAnimation {

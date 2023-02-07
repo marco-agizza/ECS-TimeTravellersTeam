@@ -20,7 +20,7 @@ struct ArchiveView: View {
         List {
             ForEach(moments) { moment in
                 if let momentDate = moment.date, let momentImage = moment.value(forKey: "picture") as? Data {
-                    var momentImage = UIImage(data: momentImage)
+                    let momentImage = UIImage(data: momentImage)
                     if let momentImage = momentImage {
                         MomentView(
                             momentDescription: moment.desc,
@@ -31,9 +31,11 @@ struct ArchiveView: View {
                         )
                     }
                 }
-            }.onDelete(perform: deleteProducts)
-            
+            }
+            .onDelete(perform: deleteProducts)
+            .listRowSeparator(.hidden)
         }
+        .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
